@@ -16,7 +16,7 @@ const router = createBrowserRouter([
 		element: <FeedRead />
 	},
 	{
-		path: "/feed-write/:feedId",
+		path: "/feed-write",
 		element: <FeedWrite />
 	},
 	{
