@@ -1,0 +1,34 @@
+import { createBrowserRouter } from "react-router-dom";
+import FeedRead from "../pages/FeedRead";
+import FeedWrite from "../pages/FeedWrite";
+import Join from "../pages/Join";
+import Login from "../pages/Login";
+import Mypage from "../pages/Mypage";
+import Newsfeed from "../pages/Newsfeed";
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <Newsfeed />
+	},
+	{
+		path: "/feed-read/:feedId",
+		element: <FeedRead />
+	},
+	{
+		path: "/feed-write/:feedId",
+		element: <FeedWrite />
+	},
+	{
+		path: "/join",
+		element: <Join />
+	},
+	{
+		path: "/login",
+		element: <Login />
+	},
+	{
+		path: "/my-page/:userId",
+		element: <Mypage />
+	}
+]);
+export default router;
