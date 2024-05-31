@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Newfeed() {
 	return (
 		<main>
-			<h1>스피드런 화이팅</h1>
+			<h1>스피드런 화이팅!!</h1>
 			<div>
 				<Link to="/feed-read/1">읽기 페이지</Link>
 			</div>
