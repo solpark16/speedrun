@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import FeedEdit from "../pages/FeedEdit";
 import FeedRead from "../pages/FeedRead";
 import FeedWrite from "../pages/FeedWrite";
 import Join from "../pages/Join";
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
 	{
 		path: "/feed-write/:feedId",
 		element: <FeedWrite />
+	},
+	{
+		path: "/feed-edit/:feedId",
+		element: <FeedEdit />
 	},
 	{
 		path: "/join",
