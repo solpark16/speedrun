@@ -23,7 +23,7 @@ const StyledMainBanner = styled.div`
 	background-color: #e7404a;
 `;
 const StyledBgBanner = styled.div`
-	background-image: url("../src/assets/main-banner.png");
+	background-image: url("/src/assets/main-banner.png");
 	background-position: center right;
 	background-size: 460px 215px;
 	background-repeat: no-repeat;

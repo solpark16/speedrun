@@ -1,6 +1,14 @@
+import { useSelector } from "react-redux";
 import { styled } from "styled-components";
 function ShareButton() {
-	return <StyledShareButton>Share</StyledShareButton>;
+	const newsfeedList = useSelector((state) => state.newsfeed.list);
+
+	const handleShare = () => {
+		newsfeedList.forEach((list) => {
+			window.prompt("복사하여 사용하세요.", `http://speedrun-virid.vercel.app/feed-read/${list.id}`);
+		});
+	};
+	return <StyledShareButton onClick={handleShare}>Share</StyledShareButton>;
 }
 
 const StyledShareButton = styled.button`
