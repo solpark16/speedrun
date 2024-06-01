@@ -1,5 +1,15 @@
+import Header from "../components/Header";
+import MyNewsfeedList from "../components/MyNewsfeedList";
+import Profile from "../components/Profile";
+
 function Mypage() {
-  return <div>Mypage</div>;
+	return (
+		<>
+			<Header />
+			<Profile />
+			<MyNewsfeedList />
+		</>
+	);
 }
 
 export default Mypage;
