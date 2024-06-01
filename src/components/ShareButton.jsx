@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 function ShareButton() {
-	return <StyledShareButton>Share</StyledShareButton>;
+	const handleShare = () => {};
+	return <StyledShareButton onClick={handleShare}>Share</StyledShareButton>;
 }
 
 const StyledShareButton = styled.button`

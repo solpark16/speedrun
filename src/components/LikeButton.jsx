@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { styled } from "styled-components";
 function LikeButton() {
+	const [heart, setHeart] = useState(0);
+	const handleLike = () => setHeart((prev) => prev + 1);
 	return (
 		<StyledLikeBox>
-			<button>하트</button>
-			<span>1</span>
+			<button onClick={handleLike}>하트</button>
+			<span>{heart}</span>
 		</StyledLikeBox>
 	);
 }
