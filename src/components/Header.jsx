@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logoImg from "../assets/speed-run-logo.png";
 import { logInToggle } from "../redux/slices/user.slice";
 
 function Header() {
@@ -22,7 +21,7 @@ function Header() {
 				<StyledHeaderBox>
 					<StyleLogoBox>
 						<Link to="/">
-							<img src={logoImg} alt="스피드런 로고" />
+							<img src="/imgs/speed-run-logo.png" alt="스피드런 로고" />
 						</Link>
 					</StyleLogoBox>
 					<div>
@@ -57,7 +56,7 @@ const StyledLoginButton = styled.span`
 	font-size: 16px;
 	margin-right: 16px;
 	padding-left: 25px;
-	background-image: url("../src/assets/icon-login.png");
+	background-image: url("/imgs/icon-login.png");
 	background-position: left center;
 	background-size: contain;
 	background-repeat: no-repeat;
