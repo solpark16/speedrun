@@ -26,7 +26,7 @@ const StyledWriteButton = styled.div`
 		width: 58px;
 		height: 58px;
 		font-size: 0;
-		background-image: url("/img/icon-write.png");
+		background-image: url("/imgs/icon-write.png");
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: contain;

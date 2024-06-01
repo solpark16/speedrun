@@ -16,7 +16,7 @@ const StyledShareButton = styled.button`
 	width: 30px;
 	height: 30px;
 	background-color: transparent;
-	background-image: url("/img/icon-share.png");
+	background-image: url("/imgs/icon-share.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
