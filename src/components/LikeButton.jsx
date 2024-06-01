@@ -19,7 +19,7 @@ const StyledLikeBox = styled.div`
 		cursor: pointer;
 		width: 32px;
 		height: 26px;
-		background-image: url({iconHeartImg});
+		background-image: url("/imgs/icon-heart.png");
 		background-color: transparent;
 		background-position: center;
 		background-size: cover;
