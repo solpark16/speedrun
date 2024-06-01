@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-function ListItem() {
+function ListItem({ title, content, date, userId }) {
 	return (
 		<StyledListItem>
 			<StyledListHeader>
@@ -7,24 +7,13 @@ function ListItem() {
 					<img src="../src/assets/default-user-profile.png" alt="유저 아이디" />
 				</StyledImgBox>
 				<StyledInfoBox>
-					<StyledListTitle>
-						타이틀 개 길게 써도 되는지 확인하는 중 입니다. 타이틀 개 길게 써도 되는지 확인하는 중 입니다.
-					</StyledListTitle>
+					<StyledListTitle>{title}</StyledListTitle>
 					<div>
-						<span>zomins</span> | <span>5월 21일 오후 3:00</span>
+						<span>{userId}</span> | <span>{date}</span>
 					</div>
 				</StyledInfoBox>
 			</StyledListHeader>
-			<StyledListContent>
-				Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque
-				ultrices.Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit
-				nullam neque ultrices.Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit
-				aliquam sit nullam neque ultrices.Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus
-				mollis sit aliquam sit nullam neque ultrices.Lorem ipsum dolor sit amet consectetur adipiscing eli nullam neque
-				ultrices.Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit
-				nullam neque ultrices.Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit
-				aliquam sit nullam neque ultrices.Lorem ipsum dolor sit amet consectetur adipiscing eli
-			</StyledListContent>
+			<StyledListContent>{content}</StyledListContent>
 		</StyledListItem>
 	);
 }
