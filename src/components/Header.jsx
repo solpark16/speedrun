@@ -1,6 +1,20 @@
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { logInToggle } from "../redux/slices/user.slice";
+
 function Header() {
+	const navigate = useNavigate();
+	const isLogIn = useSelector((state) => state.user.isLogIn);
+	const dispatch = useDispatch();
+	const handleLogIn = () => {
+		dispatch(logInToggle(true));
+		navigate("/login");
+	};
+	const handleLogOut = () => {
+		dispatch(logInToggle(false));
+	};
+
 	return (
 		<StyledHeader>
 			<div className="container">
@@ -11,9 +25,8 @@ function Header() {
 						</Link>
 					</StyleLogoBox>
 					<div>
-						<StyledLoginButton>
-							<Link to="/login">Login</Link>
-						</StyledLoginButton>
+						{isLogIn && <StyledLoginButton onClick={handleLogOut}>LogOut</StyledLoginButton>}
+						{!isLogIn && <StyledLoginButton onClick={handleLogIn}>LogIn</StyledLoginButton>}
 						<StyledMypageButton>
 							<Link to="/my-page/:userId">마이페이지</Link>
 						</StyledMypageButton>
@@ -39,6 +52,7 @@ const StyleLogoBox = styled.h1`
 	}
 `;
 const StyledLoginButton = styled.span`
+	cursor: pointer;
 	font-size: 16px;
 	margin-right: 16px;
 	padding-left: 25px;
