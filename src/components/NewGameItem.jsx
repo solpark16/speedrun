@@ -5,7 +5,7 @@ function NewGameItem({ game }) {
 	return (
 		<Link to={`/feed-read/${game.id}`} key={game.id}>
 			<StyledNewGameImg>
-				<img src={`/img/${game.url}`} alt="게임 이름" />
+				<img src={`/imgs/${game.url}`} alt="게임 이름" />
 			</StyledNewGameImg>
 		</Link>
 	);
