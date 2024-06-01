@@ -21,7 +21,10 @@ function Header() {
 				<StyledHeaderBox>
 					<StyleLogoBox>
 						<Link to="/">
-							<img src="/src/assets/speed-run-logo.png" alt="스피드런 로고" />
+							<img
+								src="https://speedrun-30br1upn8-textigns-projects.vercel.app//src/assets/speed-run-logo.png"
+								alt="스피드런 로고"
+							/>
 						</Link>
 					</StyleLogoBox>
 					<div>
