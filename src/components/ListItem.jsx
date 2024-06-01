@@ -4,7 +4,7 @@ function ListItem({ title, content, date, userId }) {
 		<StyledListItem>
 			<StyledListHeader>
 				<StyledImgBox>
-					<img src="/src/assets/default-user-profile.png" alt="유저 아이디" />
+					<img src="/imgs/default-user-profile.png" alt="유저 아이디" />
 				</StyledImgBox>
 				<StyledInfoBox>
 					<StyledListTitle>{title}</StyledListTitle>
