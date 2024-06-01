@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import logoImg from "../assets/speed-run-logo.png";
 import { logInToggle } from "../redux/slices/user.slice";
 
 function Header() {
@@ -21,10 +22,7 @@ function Header() {
 				<StyledHeaderBox>
 					<StyleLogoBox>
 						<Link to="/">
-							<img
-								src="https://speedrun-30br1upn8-textigns-projects.vercel.app//src/assets/speed-run-logo.png"
-								alt="스피드런 로고"
-							/>
+							<img src={logoImg} alt="스피드런 로고" />
 						</Link>
 					</StyleLogoBox>
 					<div>
