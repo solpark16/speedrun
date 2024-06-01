@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
-function NewGameItem() {
+function NewGameItem({ game }) {
 	return (
-		<Link to="">
+		<Link to={`/feed-read/${game.id}`} key={game.id}>
 			<StyledNewGameImg>
-				<img src="../src/assets/default-new-game.png" alt="게임 이름" />
+				<img src={`../src/assets/${game.url}`} alt="게임 이름" />
 			</StyledNewGameImg>
 		</Link>
 	);
@@ -13,7 +13,9 @@ function NewGameItem() {
 
 const StyledNewGameImg = styled.div`
 	width: 100%;
-	border-radius: 26px;
+	img {
+		width: 100%;
+	}
 `;
 
 export default NewGameItem;
