@@ -1,10 +1,14 @@
 import { styled } from "styled-components";
+import ProfileUpdateButton from "./ProfileUpdateButton";
 
 const Profile = () => {
 	return (
 		<StyledProfileBanner>
 			<div className="container">
-				<StyledMyPageTitle>마이페이지</StyledMyPageTitle>
+				<StyledProfileHeader>
+					<StyledMyPageTitle>마이페이지</StyledMyPageTitle>
+					<ProfileUpdateButton />
+				</StyledProfileHeader>
 				<StyledProfileBox>
 					{/* 프로필 이미지. img 태그로 바꿀 가능성 염두 */}
 					<StyledProfileImg></StyledProfileImg>
@@ -31,6 +35,10 @@ const StyledProfileBanner = styled.div`
 	min-height: 757px;
 	padding: 73px;
 	box-sizing: border-box;
+`;
+const StyledProfileHeader = styled.div`
+	display: flex;
+	justify-content: space-between;
 `;
 const StyledMyPageTitle = styled.h2`
 	font-size: 48px;
