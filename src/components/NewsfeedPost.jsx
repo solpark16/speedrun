@@ -2,12 +2,14 @@ import { styled } from "styled-components";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getInitalFeed } from "../redux/slices/newsfeed.slice";
 import { getNewsfeed } from "../utils/getNewsfeed";
+import supabase from "../supabase/supabase";
 
 const NewsfeedPost = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { feedId } = useParams();
 
@@ -26,6 +28,10 @@ const NewsfeedPost = () => {
 	});
 	const { title, userId, date, content } = { ...getPost };
 
+	const deletePostHandler = async () => {
+		const { error } = await supabase.from("newsfeed").delete().eq("id", feedId);
+		navigate("/");
+	};
 	return (
 		<StyledNewsfeedPost>
 			<div className="container">
@@ -40,6 +46,7 @@ const NewsfeedPost = () => {
 								<span>{userId}</span> | <span>{date}</span>
 							</div>
 						</StyledInfoBox>
+						<StyledDeleteButton onClick={() => deletePostHandler()}>삭제</StyledDeleteButton>
 					</StyledPostHeader>
 					<StyledPostContent>{content}</StyledPostContent>
 					<StyledPostFooter>
@@ -78,6 +85,9 @@ const StyledInfoBox = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+`;
+const StyledDeleteButton = styled.button`
+	cursor: pointer;
 `;
 const StyledListTitle = styled.div`
 	width: 100%;
