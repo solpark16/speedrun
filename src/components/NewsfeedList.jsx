@@ -27,7 +27,7 @@ function NewsfeedList() {
 					{newsfeedList.map((list) => {
 						return (
 							<li key={list.id}>
-								<Link to={`/feed-write/${list.id}`}>
+								<Link to={`/feed-read/${list.id}`}>
 									<ListItem title={list.title} content={list.content} date={list.date} userId={list.userId} />
 								</Link>
 								<StyledListFooter>
