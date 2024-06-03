@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { addNewsfeed } from "../redux/slices/newsfeed.slice";
+import { v4 as uuidv4 } from "uuid";
+import supabase from "../supabase/supabase";
 
 const TitleInput = styled.input`
 	font-family: inherit;
@@ -85,10 +89,14 @@ const Button = styled.button`
 `;
 
 function WritingForm() {
+	const dispatch = useDispatch();
+
 	const [formData, setFormData] = useState({
+		id: uuidv4(),
+		date: new Date().getDate(),
 		title: "",
-		tags: "",
-		body: ""
+		content: "",
+		userId: "userId"
 	});
 
 	const handleChange = (e) => {
@@ -98,12 +106,29 @@ function WritingForm() {
 			[name]: value
 		});
 	};
+	console.log(formData);
+
+	async function add() {
+		const { data, error } = await supabase.from("newsfeed").insert([formData]).select();
+		console.log(data);
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		add();
+
+		dispatch(addNewsfeed(formData));
+
 		// 폼 제출 처리
 		console.log("Form Data:", formData);
 	};
+
+	async function getUserId(userId) {
+		const {
+			data: { user }
+		} = await supabase.auth.getUser(userId);
+	}
 
 	return (
 		<div>
@@ -112,7 +137,6 @@ function WritingForm() {
 					<StyledDiv>
 						<TitleInput
 							type="text"
-							id="title"
 							name="title"
 							placeholder="제목을 입력하세요"
 							value={formData.title}
@@ -120,7 +144,7 @@ function WritingForm() {
 						/>
 						<div style={{ borderBottom: "5px solid #b4b9c9", padding: "15px" }}></div>
 					</StyledDiv>
-					<StyledDiv>
+					{/* <StyledDiv>
 						<Input
 							type="text"
 							id="tags"
@@ -129,13 +153,12 @@ function WritingForm() {
 							value={formData.tags}
 							onChange={handleChange}
 						/>
-					</StyledDiv>
+					</StyledDiv> */}
 					<StyledDiv>
 						<TextArea
-							id="body"
-							name="body"
+							name="content"
 							placeholder="내용을 입력해주세요..."
-							value={formData.body}
+							value={formData.content}
 							onChange={handleChange}
 						></TextArea>
 					</StyledDiv>
