@@ -34,6 +34,10 @@ const StyledNewGames = styled.ul`
 	li {
 		overflow: hidden;
 		border-radius: 26px;
+		a {
+			display: block;
+			height: 100%;
+		}
 	}
 `;
 
