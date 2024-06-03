@@ -8,9 +8,12 @@ export const newsfeedSlice = createSlice({
 	reducers: {
 		getInitalFeed: (state, action) => {
 			state.list = action.payload;
+		},
+		addNewsfeed: (state, action) => {
+			state.list = [...state.list, action.payload];
 		}
 	}
 });
 
-export const { getInitalFeed } = newsfeedSlice.actions;
+export const { getInitalFeed, addNewsfeed } = newsfeedSlice.actions;
 export default newsfeedSlice.reducer;
