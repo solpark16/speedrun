@@ -2,45 +2,64 @@ import { styled } from "styled-components";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { getInitalFeed } from "../redux/slices/newsfeed.slice";
 import { getNewsfeed } from "../utils/getNewsfeed";
+import supabase from "../supabase/supabase";
+import { getSelectedNewsfeed } from "../utils/getSelectedNewsfeed";
 
 const NewsfeedPost = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { feedId } = useParams();
 
-	const newsfeedList = useSelector((state) => state.newsfeed.list);
+	const [post, setPost] = useState({});
+
 	async function getData() {
-		const data = await getNewsfeed();
-		dispatch(getInitalFeed(data));
+		const data = await getSelectedNewsfeed(feedId);
+		setPost(data[0]);
 	}
 
 	useEffect(() => {
 		getData();
 	}, []);
 
-	const getPost = newsfeedList.find((newsfeed) => {
-		return newsfeed.id === feedId;
-	});
-	const { title, userId, date, content } = { ...getPost };
+	const { id, title, userId, date, content } = post;
+
+	// 게시물 삭제 핸들러
+	const deletePostHandler = async () => {
+		const confirmDelete = confirm("정말 삭제하시겠습니까?");
+		if (confirmDelete) {
+			const { error } = await supabase.from("newsfeed").delete().eq("id", feedId);
+			navigate("/");
+		}
+	};
 
 	return (
 		<StyledNewsfeedPost>
 			<div className="container">
 				<StyledPostItem>
 					<StyledPostHeader>
-						<StyledImgBox>
-							<img src="/imgs/default-user-profile.png" alt="유저 아이디" />
-						</StyledImgBox>
-						<StyledInfoBox>
-							<StyledListTitle>{title}</StyledListTitle>
-							<div>
-								<span>{userId}</span> | <span>{date}</span>
-							</div>
-						</StyledInfoBox>
+						<StyledPostHeaderLeft>
+							<StyledImgBox>
+								<img src="/imgs/default-user-profile.png" alt="유저 아이디" />
+							</StyledImgBox>
+							<StyledInfoBox>
+								<StyledListTitle>{title}</StyledListTitle>
+								<div>
+									<span>{userId}</span> | <span>{date}</span>
+								</div>
+							</StyledInfoBox>
+						</StyledPostHeaderLeft>
+						<div>
+							<Link to={`/feed-edit/${id}`}>
+								<StyledButton>수정하기</StyledButton>
+							</Link>
+							<StyledButton onClick={() => deletePostHandler()}>삭제하기</StyledButton>
+						</div>
 					</StyledPostHeader>
+
 					<StyledPostContent>{content}</StyledPostContent>
 					<StyledPostFooter>
 						<LikeButton />
@@ -61,9 +80,11 @@ const StyledPostItem = styled.div`
 `;
 
 const StyledPostHeader = styled.div`
-	width: 100%;
-	display: grid;
-	grid-template-columns: 96px 986px;
+	display: flex;
+	justify-content: space-between;
+`;
+const StyledPostHeaderLeft = styled.div`
+	display: flex;
 	gap: 24px;
 `;
 const StyledImgBox = styled.div`
@@ -74,13 +95,24 @@ const StyledImgBox = styled.div`
 	}
 `;
 const StyledInfoBox = styled.div`
-	width: 100%;
+	/* width: 100%; */
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 `;
+const StyledButton = styled.button`
+	width: 145px;
+	height: 52px;
+	cursor: pointer;
+	background-color: #e7404a;
+	color: #fff;
+	font-size: 20px;
+	border-radius: 9px;
+	border: none;
+	margin-left: 23px;
+`;
 const StyledListTitle = styled.div`
-	width: 100%;
+	/* width: 100%; */
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
