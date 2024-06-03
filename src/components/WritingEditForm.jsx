@@ -84,7 +84,7 @@ const Button = styled.button`
 	}
 `;
 
-function WritingForm() {
+function WritingEditForm() {
 	const [formData, setFormData] = useState({
 		title: "",
 		tags: "",
@@ -139,11 +139,11 @@ function WritingForm() {
 							onChange={handleChange}
 						></TextArea>
 					</StyledDiv>
-					<Button type="submit">저장하기</Button>
+					<Button type="submit">수정하기</Button>
 				</Form>
 			</div>
 		</div>
 	);
 }
 
-export default WritingForm;
+export default WritingEditForm;

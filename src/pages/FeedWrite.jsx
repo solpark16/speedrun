@@ -1,10 +1,11 @@
-import { useState } from "react";
+import Header from "../components/Header";
+import WritingForm from "../components/WritingForm";
 
 function FeedWrite() {
 	return (
 		<>
-			<div>FeedWrite</div>
-			<h1>hello</h1>
+			<Header />
+			<WritingForm />
 		</>
 	);
 }
