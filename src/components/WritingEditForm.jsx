@@ -34,22 +34,6 @@ const StyledDiv = styled.div`
 	margin-bottom: 20px;
 `;
 
-const Input = styled.input`
-	font-family: inherit;
-	font-size: 30px;
-	font-weight: 500;
-	line-height: 48px;
-	text-align: left;
-	padding: 10px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	border: 4px solid #e7404a;
-	border-radius: 18px;
-	background-color: #333; /* 더 어두운 입력 배경 색상 */
-	color: #fff; /* 흰색 글자 색상 */
-	padding-left: 35px;
-`;
-
 const TextArea = styled.textarea`
 	padding: 10px;
 	border: 5px solid #b4b9c9;
@@ -86,7 +70,7 @@ const Button = styled.button`
 	}
 `;
 
-function WritingForm() {
+function WritingEditForm() {
 	const [formData, setFormData] = useState({
 		title: "",
 		tags: "",
@@ -123,16 +107,6 @@ function WritingForm() {
 						<div style={{ borderBottom: "5px solid #b4b9c9", padding: "15px" }}></div>
 					</StyledDiv>
 					<StyledDiv>
-						<Input
-							type="text"
-							id="tags"
-							name="tags"
-							placeholder="태그를 입력해주세요..."
-							value={formData.tags}
-							onChange={handleChange}
-						/>
-					</StyledDiv>
-					<StyledDiv>
 						<TextArea
 							id="body"
 							name="body"
@@ -141,11 +115,11 @@ function WritingForm() {
 							onChange={handleChange}
 						></TextArea>
 					</StyledDiv>
-					<Button type="submit">저장하기</Button>
+					<Button type="submit">수정하기</Button>
 				</Form>
 			</div>
 		</div>
 	);
 }
 
-export default WritingForm;
+export default WritingEditForm;
