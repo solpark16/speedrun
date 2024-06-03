@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { addNewsfeed } from "../redux/slices/newsfeed.slice";
 import { v4 as uuidv4 } from "uuid";
 import supabase from "../supabase/supabase";
+import { useNavigate } from "react-router-dom";
 
 const TitleInput = styled.input`
 	font-family: inherit;
@@ -90,6 +91,7 @@ const Button = styled.button`
 
 function WritingForm() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
@@ -106,11 +108,9 @@ function WritingForm() {
 			[name]: value
 		});
 	};
-	console.log(formData);
 
 	async function add() {
 		const { data, error } = await supabase.from("newsfeed").insert([formData]).select();
-		console.log(data);
 	}
 
 	const handleSubmit = (e) => {
@@ -120,8 +120,7 @@ function WritingForm() {
 
 		dispatch(addNewsfeed(formData));
 
-		// 폼 제출 처리
-		console.log("Form Data:", formData);
+		navigate(-1);
 	};
 
 	async function getUserId(userId) {
