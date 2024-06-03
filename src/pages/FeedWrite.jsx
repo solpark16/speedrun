@@ -1,5 +1,13 @@
+import Header from "../components/Header";
+import WritingForm from "../components/WritingForm";
+
 function FeedWrite() {
-  return <div>FeedWrite</div>;
+	return (
+		<>
+			<Header />
+			<WritingForm />
+		</>
+	);
 }
 
 export default FeedWrite;
