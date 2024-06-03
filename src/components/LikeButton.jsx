@@ -1,12 +1,21 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 function LikeButton() {
-	const [heart, setHeart] = useState(0);
-	const handleLike = () => setHeart((prev) => prev + 1);
+	// const [totalheart, setTotalHeart] = useState(0);
+	const [isLike, setIsLike] = useState(false);
+	const handleLike = () => {
+		setIsLike((prev) => !prev);
+		// setTotalHeart((prev) => prev + 1);
+	};
+	const style = {
+		backgroundImage: isLike ? "url(/imgs/icon-heart-fill.png)" : "url(/imgs/icon-heart-empty.png)"
+	};
 	return (
 		<StyledLikeBox>
-			<button onClick={handleLike}>하트</button>
-			<span>{heart}</span>
+			<button onClick={handleLike} style={style}>
+				하트
+			</button>
+			{/* <span>{totalheart}</span> */}
 		</StyledLikeBox>
 	);
 }
@@ -19,7 +28,6 @@ const StyledLikeBox = styled.div`
 		cursor: pointer;
 		width: 32px;
 		height: 26px;
-		background-image: url("/imgs/icon-heart.png");
 		background-color: transparent;
 		background-position: center;
 		background-size: cover;
