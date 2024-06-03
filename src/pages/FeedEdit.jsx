@@ -1,5 +1,13 @@
+import Header from "../components/Header";
+import WritingEditForm from "../components/WritingEditForm";
+
 function FeedEdit() {
-	return <div>FeedEdit</div>;
+	return (
+		<>
+			<Header />
+			<WritingEditForm />
+		</>
+	);
 }
 
 export default FeedEdit;
