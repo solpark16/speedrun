@@ -1,5 +1,13 @@
+import LoginJoinHeader from "../components/LoginJoinHeader";
+import JoinForm from "../components/JoinForm";
+
 function Join() {
-  return <div>Join</div>;
+	return (
+		<>
+			<LoginJoinHeader />
+			<JoinForm />
+		</>
+	);
 }
 
 export default Join;
