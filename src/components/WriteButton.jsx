@@ -4,7 +4,9 @@ import { styled } from "styled-components";
 function WriteButton() {
 	return (
 		<StyledWriteButton>
-			<Link to="/feed-write">글쓰기</Link>
+			<Link to="/feed-write">
+				<span>글쓰기</span>
+			</Link>
 		</StyledWriteButton>
 	);
 }
@@ -22,14 +24,21 @@ const StyledWriteButton = styled.div`
 	justify-content: center;
 	align-items: center;
 	a {
-		display: block;
-		width: 58px;
-		height: 58px;
-		font-size: 0;
-		background-image: url("/imgs/icon-write.png");
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: contain;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		span {
+			display: block;
+			width: 58px;
+			height: 58px;
+			font-size: 0;
+			background-image: url("/imgs/icon-write.png");
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
 	}
 `;
 

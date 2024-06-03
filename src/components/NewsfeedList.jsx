@@ -21,7 +21,7 @@ function NewsfeedList() {
 	}, []);
 
 	return (
-		<div>
+		<div className="newsfeed-list">
 			<div className="container">
 				<StyledNewsfeedList>
 					{newsfeedList.map((list) => {
