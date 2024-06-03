@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 function LikeButton() {
-	// const [totalheart, setTotalHeart] = useState(0);
 	const [isLike, setIsLike] = useState(false);
 	const handleLike = () => {
 		setIsLike((prev) => !prev);
-		// setTotalHeart((prev) => prev + 1);
 	};
+
 	const style = {
 		backgroundImage: isLike ? "url(/imgs/icon-heart-fill.png)" : "url(/imgs/icon-heart-empty.png)"
 	};
@@ -15,7 +14,7 @@ function LikeButton() {
 			<button onClick={handleLike} style={style}>
 				하트
 			</button>
-			{/* <span>{totalheart}</span> */}
+			{/* <span>{totalHeart}</span> */}
 		</StyledLikeBox>
 	);
 }
