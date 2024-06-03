@@ -25,11 +25,15 @@ function Header() {
 						</Link>
 					</StyleLogoBox>
 					<div>
-						{isLogIn && <StyledLoginButton onClick={handleLogOut}>LogOut</StyledLoginButton>}
+						{isLogIn && (
+							<>
+								<StyledLoginButton onClick={handleLogOut}>LogOut</StyledLoginButton>
+								<StyledMypageButton>
+									<Link to="/my-page/:userId">마이페이지</Link>
+								</StyledMypageButton>
+							</>
+						)}
 						{!isLogIn && <StyledLoginButton onClick={handleLogIn}>LogIn</StyledLoginButton>}
-						<StyledMypageButton>
-							<Link to="/my-page/:userId">마이페이지</Link>
-						</StyledMypageButton>
 					</div>
 				</StyledHeaderBox>
 			</div>
