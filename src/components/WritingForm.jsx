@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import supabase from "../supabase/supabase";
 import { useNavigate } from "react-router-dom";
 
-const TitleInput = styled.input`
+const StyledTitleInput = styled.input`
 	font-family: inherit;
 	font-weight: 800;
 	line-height: 48px;
@@ -26,7 +26,7 @@ const TitleInput = styled.input`
 	}
 `;
 
-const Form = styled.form`
+const StyledForm = styled.form`
 	display: flex;
 	flex-direction: column;
 `;
@@ -37,23 +37,23 @@ const StyledDiv = styled.div`
 	margin-bottom: 20px;
 `;
 
-const Input = styled.input`
-	font-family: inherit;
-	font-size: 30px;
-	font-weight: 500;
-	line-height: 48px;
-	text-align: left;
-	padding: 10px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	border: 4px solid #e7404a;
-	border-radius: 18px;
-	background-color: #333;
-	color: #fff; /* 흰색 글자 색상 */
-	padding-left: 35px;
-`;
+// const Input = styled.input`
+// 	font-family: inherit;
+// 	font-size: 30px;
+// 	font-weight: 500;
+// 	line-height: 48px;
+// 	text-align: left;
+// 	padding: 10px;
+// 	margin-bottom: 10px;
+// 	margin-top: 10px;
+// 	border: 4px solid #e7404a;
+// 	border-radius: 18px;
+// 	background-color: #333;
+// 	color: #fff; /* 흰색 글자 색상 */
+// 	padding-left: 35px;
+// `;
 
-const TextArea = styled.textarea`
+const StyledTextArea = styled.textarea`
 	font-family: inherit;
 	padding: 10px;
 	border: 5px solid #b4b9c9;
@@ -67,7 +67,7 @@ const TextArea = styled.textarea`
 	padding-left: 35px;
 `;
 
-const Button = styled.button`
+const StyledButton = styled.button`
 	font-family: inherit;
 	padding: 10px;
 	border: none;
@@ -78,6 +78,7 @@ const Button = styled.button`
 	cursor: pointer;
 	width: 187px;
 	margin-top: 25px;
+	margin-bottom: 45px;
 	padding: 14px 18px 14px 18px;
 	gap: 3px;
 	border-radius: 6px;
@@ -132,9 +133,9 @@ function WritingForm() {
 	return (
 		<div>
 			<div className="container">
-				<Form onSubmit={handleSubmit}>
+				<StyledForm onSubmit={handleSubmit}>
 					<StyledDiv>
-						<TitleInput
+						<StyledTitleInput
 							type="text"
 							name="title"
 							placeholder="제목을 입력하세요"
@@ -154,15 +155,15 @@ function WritingForm() {
 						/>
 					</StyledDiv> */}
 					<StyledDiv>
-						<TextArea
+						<StyledTextArea
 							name="content"
 							placeholder="내용을 입력해주세요..."
 							value={formData.content}
 							onChange={handleChange}
-						></TextArea>
+						></StyledTextArea>
 					</StyledDiv>
-					<Button type="submit">저장하기</Button>
-				</Form>
+					<StyledButton type="submit">저장하기</StyledButton>
+				</StyledForm>
 			</div>
 		</div>
 	);
