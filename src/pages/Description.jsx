@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
-import LoginJoinHeader from "../components/LoginJoinHeader";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import supabase from "../supabase/supabase";
+import styled from "styled-components";
+import LoginJoinHeader from "../components/join_login/LoginJoinHeader";
 function Description() {
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	console.log(currentUser);
