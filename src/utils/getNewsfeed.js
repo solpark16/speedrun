@@ -5,3 +5,9 @@ export async function getNewsfeed() {
 	if (error) throw error;
 	return newsfeed;
 }
+
+export async function updateNewsfeedLike({ like, id }) {
+	console.log(id);
+	const { error } = await supabase.from("newsfeed").update({ like: like }).eq("id", id);
+	if (error) throw error;
+}

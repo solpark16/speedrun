@@ -1,12 +1,40 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
-function LikeButton() {
-	const [heart, setHeart] = useState(0);
-	const handleLike = () => setHeart((prev) => prev + 1);
+import { updateLike } from "../redux/slices/newsfeed.slice";
+import { updateNewsfeedLike } from "../utils/getNewsfeed";
+function LikeButton({ feedId }) {
+	const dispatch = useDispatch();
+	const [isLike, setIsLike] = useState(false);
+	const isLogIn = useSelector((state) => state.user.isLogIn);
+	const newsfeeds = useSelector((state) => state.newsfeed.list);
+	const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
+	const { like, id } = selectFeed;
+
+	const handleLike = async () => {
+		if (isLogIn) {
+			setIsLike((prev) => !prev);
+			const newLike = {
+				id,
+				like: isLike ? like - 1 : like + 1
+			};
+			dispatch(updateLike(newLike));
+			await updateNewsfeedLike(newLike);
+		} else {
+			alert("로그인이 필요합니다.");
+		}
+	};
+
+	const style = {
+		backgroundImage: isLike ? "url(/imgs/icon-heart-fill.png)" : "url(/imgs/icon-heart-empty.png)"
+	};
+
 	return (
 		<StyledLikeBox>
-			<button onClick={handleLike}>하트</button>
-			<span>{heart}</span>
+			<button onClick={handleLike} style={style}>
+				하트
+			</button>
+			<span>{like || 0}</span>
 		</StyledLikeBox>
 	);
 }
@@ -19,7 +47,6 @@ const StyledLikeBox = styled.div`
 		cursor: pointer;
 		width: 32px;
 		height: 26px;
-		background-image: url("/imgs/icon-heart.png");
 		background-color: transparent;
 		background-position: center;
 		background-size: cover;

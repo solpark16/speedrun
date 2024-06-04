@@ -34,21 +34,21 @@ const StyledDiv = styled.div`
 	margin-bottom: 20px;
 `;
 
-const StyledInput = styled.input`
-	font-family: inherit;
-	font-size: 30px;
-	font-weight: 500;
-	line-height: 48px;
-	text-align: left;
-	padding: 10px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	border: 4px solid #e7404a;
-	border-radius: 18px;
-	background-color: #333;
-	color: #fff; /* 흰색 글자 색상 */
-	padding-left: 35px;
-`;
+// const StyledInput = styled.input`
+// 	font-family: inherit;
+// 	font-size: 30px;
+// 	font-weight: 500;
+// 	line-height: 48px;
+// 	text-align: left;
+// 	padding: 10px;
+// 	margin-bottom: 10px;
+// 	margin-top: 10px;
+// 	border: 4px solid #e7404a;
+// 	border-radius: 18px;
+// 	background-color: #333;
+// 	color: #fff; /* 흰색 글자 색상 */
+// 	padding-left: 35px;
+// `;
 
 const StyledTextArea = styled.textarea`
 	font-family: inherit;
