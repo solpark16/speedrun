@@ -18,28 +18,6 @@ const StyleLogoBox = styled.h1`
 	}
 `;
 
-const Logo = styled.img`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
-
-const LoginBox = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 5rem;
-`;
-
-const Title = styled.h2`
-	color: #fff;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 2.5rem;
-	margin-top: 3.5rem;
-`;
-
 function LoginHeader() {
 	return (
 		<>
@@ -54,10 +32,6 @@ function LoginHeader() {
 					</StyledHeaderBox>
 				</div>
 			</StyledHeader>
-			<LoginBox>
-				<Logo src="imgs/speed-run-login.png" alt="로그인" />
-			</LoginBox>
-			<Title>LOGIN</Title>
 		</>
 	);
 }
