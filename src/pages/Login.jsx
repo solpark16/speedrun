@@ -4,8 +4,9 @@ import LoginInput from "../components/LoginInput";
 import LoginLinks from "../components/LoginLinks";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { SupabaseClient } from "@supabase/supabase-js";
 
-const LoginBox = styled.div`
+const StyledLoginBox = styled.div`
 	width: 1122px;
 	height: 965px;
 	background-color: #fff;
@@ -17,11 +18,11 @@ const LoginBox = styled.div`
 	margin: 110px auto;
 `;
 
-const LoginText = styled.h2`
+const StyledLoginText = styled.h2`
 	color: #2c2b2f;
-	font-size: 45px;
-	font-weight: bold;
-	margin-bottom: 120px;
+	font-size: 48px;
+	font-weight: 800;
+	margin-bottom: 45px;
 `;
 
 const StyledDivider = styled.div`
@@ -71,17 +72,17 @@ function Login() {
 	return (
 		<>
 			<LoginHeader />
-			<LoginBox>
-				<LoginText>Sign In</LoginText>
+			<StyledLoginBox>
+				<StyledLoginText>Sign In</StyledLoginText>
 				<StyledDivider />
 				<StyledGoogleBox>
 					<StyledGoogleimg>Sign In With Google</StyledGoogleimg>
 				</StyledGoogleBox>
 				<StyledDivider />
-				<LoginInput />
+				<LoginInput email={email} setEmail={setEmail} password={password} setPassword={setPassword} />
 				<LoginButton />
 				<LoginLinks />
-			</LoginBox>
+			</StyledLoginBox>
 		</>
 	);
 }

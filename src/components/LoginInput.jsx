@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const FormBox = styled.form`
+const StyledFormBox = styled.form`
 	display: flex;
 	align-items: center;
 	justify-content: center;
 `;
 
-const InputForm = styled.input`
+const StyledInputForm = styled.input`
+	font-family: inherit;
 	width: 675px;
 	height: 68px;
 	margin-bottom: 40px;
@@ -23,7 +24,8 @@ const InputForm = styled.input`
 	box-sizing: border-box;
 `;
 
-const PasswordInput = styled.input`
+const StyledPasswordInput = styled.input`
+	font-family: inherit;
 	width: 675px;
 	height: 68px;
 	margin-bottom: 40px;
@@ -40,13 +42,23 @@ const PasswordInput = styled.input`
 	box-sizing: border-box;
 `;
 
-function LoginInput() {
+function LoginInput({ email, setEmail, password, setPassword }) {
 	return (
 		<>
-			<FormBox>
-				<InputForm type="email" placeholder="이메일을 입력해주세요" />
-			</FormBox>
-			<PasswordInput type="password" placeholder="비밀번호를 입력해주세요" />
+			<StyledFormBox>
+				<StyledInputForm
+					type="email"
+					placeholder="이메일을 입력해주세요"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+				/>
+			</StyledFormBox>
+			<StyledPasswordInput
+				type="password"
+				placeholder="비밀번호를 입력해주세요"
+				value={password}
+				onChange={(e) => setPassword(e.target.value)}
+			/>
 		</>
 	);
 }
