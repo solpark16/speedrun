@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import supabase from "../supabase/supabase";
+import { useNavigate, useParams } from "react-router-dom";
 
 const StyledTitleInput = styled.input`
 	font-family: inherit;
@@ -87,19 +87,26 @@ const StyledButton = styled.button`
 `;
 
 function WritingEditForm() {
-	async function getSelectedNewsFeed() {
-		const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").eq("id", feedId);
-		console.log(newsfeed);
-	}
-	getSelectedNewsFeed();
-	// const newsfeed = useSelector((state) => state.newsfeed.list);
-	// console.log(newsfeed);
+	const { feedId } = useParams();
+	const navigate = useNavigate();
 
 	const [formData, setFormData] = useState({
 		title: "",
-		tags: "",
-		body: ""
+		content: ""
 	});
+
+	async function getSelectedNewsFeed() {
+		const { data } = await supabase.from("newsfeed").select("*").eq("id", feedId);
+		const { title, content } = data[0];
+		setFormData({
+			title,
+			content
+		});
+	}
+
+	useEffect(() => {
+		getSelectedNewsFeed();
+	}, []);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -109,8 +116,16 @@ function WritingEditForm() {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+		await supabase
+			.from("newsfeed")
+			.update({
+				title: formData.title,
+				content: formData.content
+			})
+			.eq("id", feedId);
+		navigate(`/feed-read/${feedId}`);
 	};
 
 	return (
@@ -129,7 +144,7 @@ function WritingEditForm() {
 						<div style={{ borderBottom: "5px solid #b4b9c9", padding: "15px" }}></div>
 					</StyledDiv>
 					{/* <StyledDiv>
-						<Input
+						<StyledInput
 							type="text"
 							id="tags"
 							name="tags"
@@ -140,10 +155,10 @@ function WritingEditForm() {
 					</StyledDiv> */}
 					<StyledDiv>
 						<StyledTextArea
-							id="body"
-							name="body"
+							id="content"
+							name="content"
 							placeholder="내용을 입력해주세요..."
-							value={formData.body}
+							value={formData.content}
 							onChange={handleChange}
 						></StyledTextArea>
 					</StyledDiv>

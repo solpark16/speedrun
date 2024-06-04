@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import supabase from "../supabase/supabase";
 import { getSelectedNewsfeed } from "../utils/getSelectedNewsfeed";
 import LikeButton from "./LikeButton";
@@ -12,13 +12,13 @@ const NewsfeedPost = () => {
 
 	const [post, setPost] = useState({});
 
-	async function getData() {
+	async function getPost() {
 		const data = await getSelectedNewsfeed(feedId);
 		setPost(data[0]);
 	}
 
 	useEffect(() => {
-		getData();
+		getPost();
 	}, []);
 
 	const { id, title, userId, date, content } = post;
