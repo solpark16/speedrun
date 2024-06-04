@@ -102,6 +102,7 @@ const StyledButton = styled.button`
 	border-radius: 9px;
 	border: none;
 	margin-left: 23px;
+	font: inherit;
 `;
 const StyledListTitle = styled.div`
 	/* width: 100%; */
