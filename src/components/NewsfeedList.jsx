@@ -32,7 +32,7 @@ function NewsfeedList() {
 								</Link>
 								<StyledListFooter>
 									<LikeButton feedId={list.id} />
-									<ShareButton />
+									<ShareButton feedId={list.id} />
 								</StyledListFooter>
 							</li>
 						);
