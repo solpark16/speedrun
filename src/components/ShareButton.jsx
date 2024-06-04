@@ -3,10 +3,8 @@ import { styled } from "styled-components";
 function ShareButton({ feedId }) {
 	const newsfeeds = useSelector((state) => state.newsfeed.list);
 	const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
-	const { id } = selectFeed;
-
 	const handleShare = () => {
-		window.prompt("복사하여 사용하세요.", `http://speedrun-virid.vercel.app/feed-read/${id}`);
+		window.prompt("복사하여 사용하세요.", `http://speedrun-virid.vercel.app/feed-read/${selectFeed.id}`);
 	};
 	return <StyledShareButton onClick={handleShare}>Share</StyledShareButton>;
 }
