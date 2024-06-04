@@ -19,10 +19,7 @@ export async function getNewsfeedLike(feedId) {
 }
 
 export async function addNewsfeedLike({ userId, feedId }) {
-	const { error } = await supabase
-		.from("like")
-		.insert([{ userId: userId, feedId: feedId }])
-		.select();
+	const { error } = await supabase.from("like").insert([{ userId, feedId }]).select();
 
 	if (error) throw error;
 }

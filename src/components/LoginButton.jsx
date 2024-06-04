@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const StyledButtonLogin = styled.button`
@@ -13,17 +12,10 @@ const StyledButtonLogin = styled.button`
 	cursor: pointer;
 `;
 
-function LoginButton({ handleLoginClick }) {
-	const handleLogin = () => {
-		alert("회원가입으로 이동해주세요");
-	};
-
+function LoginButton() {
 	return (
 		<>
-			<StyledButtonLogin type="submit" onClick={handleLogin}>
-				Sign in
-			</StyledButtonLogin>
-			;
+			<StyledButtonLogin type="submit">Sign in</StyledButtonLogin>;
 		</>
 	);
 }
