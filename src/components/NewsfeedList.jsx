@@ -31,7 +31,7 @@ function NewsfeedList() {
 									<ListItem title={list.title} content={list.content} date={list.date} userId={list.userId} />
 								</Link>
 								<StyledListFooter>
-									<LikeButton />
+									<LikeButton feedId={list.id} />
 									<ShareButton />
 								</StyledListFooter>
 							</li>
