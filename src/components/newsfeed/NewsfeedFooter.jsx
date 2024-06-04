@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { addNewsfeedLike, getNewsfeedLike, removNewsfeedLike } from "../api/feed";
+import { addNewsfeedLike, getNewsfeedLike, removNewsfeedLike } from "../../api/feed";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 
@@ -17,12 +17,17 @@ function NewsfeedFooter({ feedId }) {
 		const likes = await getNewsfeedLike(feedId);
 		const likeCount = likes.length;
 		setHeart(likeCount);
-		likeCount > 0 ? setIsLike(true) : setIsLike(false);
+		if (isLogIn) {
+			likeCount > 0 ? setIsLike(true) : setIsLike(false);
+		} else {
+			setIsLike(false);
+		}
 	};
 
 	useEffect(() => {
 		getLikeCount();
-	}, []);
+	}, [selectFeed]);
+
 	const handleLike = async () => {
 		if (isLogIn) {
 			const newLike = {

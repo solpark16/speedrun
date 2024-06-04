@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getLoginUser } from "../api/auth";
-import { logInToggle } from "../redux/slices/user.slice";
+import { getLoginUser } from "../../api/auth";
+import { logInToggle } from "../../redux/slices/user.slice";
 import LoginButton from "./LoginButton";
 
 const StyledFormBox = styled.form`

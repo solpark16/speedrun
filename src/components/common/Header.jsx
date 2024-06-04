@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { logInToggle, setCurrentUser } from "../redux/slices/user.slice";
+import { logInToggle, setCurrentUser } from "../../redux/slices/user.slice";
 
 function Header() {
 	const isLogIn = useSelector((state) => state.user.isLogIn);
