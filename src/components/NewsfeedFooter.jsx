@@ -10,7 +10,7 @@ function NewsfeedFooter({ feedId }) {
 	const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
 	const [isLike, setIsLike] = useState(false);
 	const isLogIn = useSelector((state) => state.user.isLogIn);
-	const { id } = useSelector((state) => state.user.currentUserInfo);
+	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const [heart, setHeart] = useState(0);
 
 	const getLikeCount = async () => {
@@ -26,7 +26,7 @@ function NewsfeedFooter({ feedId }) {
 	const handleLike = async () => {
 		if (isLogIn) {
 			const newLike = {
-				userId: id,
+				userId: currentUser.id,
 				feedId: feedId
 			};
 			setIsLike((prev) => !prev);
