@@ -1,28 +1,24 @@
 import { styled } from "styled-components";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getInitalFeed } from "../redux/slices/newsfeed.slice";
-import { getNewsfeed } from "../utils/getNewsfeed";
 import supabase from "../supabase/supabase";
 import { getSelectedNewsfeed } from "../utils/getSelectedNewsfeed";
 
 const NewsfeedPost = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	const { feedId } = useParams();
 
 	const [post, setPost] = useState({});
 
-	async function getData() {
+	async function getPost() {
 		const data = await getSelectedNewsfeed(feedId);
 		setPost(data[0]);
 	}
 
 	useEffect(() => {
-		getData();
+		getPost();
 	}, []);
 
 	const { id, title, userId, date, content } = post;
