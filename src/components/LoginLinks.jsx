@@ -20,7 +20,7 @@ function LoginLinks() {
 	return (
 		<>
 			<StyledLoginLink>
-				You haven`t any accout? <StyledJoinLink to="/Join">Sign Up</StyledJoinLink>
+				You haven't any accout? <StyledJoinLink to="/Join">Sign Up</StyledJoinLink>
 			</StyledLoginLink>
 			;
 		</>

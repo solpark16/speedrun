@@ -8,6 +8,7 @@ const StyledFormBox = styled.form`
 `;
 
 const StyledInputForm = styled.input`
+	font-family: inherit;
 	width: 675px;
 	height: 68px;
 	margin-bottom: 40px;
@@ -24,6 +25,7 @@ const StyledInputForm = styled.input`
 `;
 
 const StyledPasswordInput = styled.input`
+	font-family: inherit;
 	width: 675px;
 	height: 68px;
 	margin-bottom: 40px;
