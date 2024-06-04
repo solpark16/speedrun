@@ -1,6 +1,6 @@
-import { styled } from "styled-components";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { styled } from "styled-components";
 import supabase from "../supabase/supabase";
 import { getSelectedNewsfeed } from "../utils/getSelectedNewsfeed";
 import LikeButton from "./LikeButton";
@@ -59,7 +59,7 @@ const NewsfeedPost = () => {
 					<StyledPostContent>{content}</StyledPostContent>
 					<StyledPostFooter>
 						<LikeButton feedId={feedId} />
-						<ShareButton />
+						<ShareButton feedId={feedId} />
 					</StyledPostFooter>
 				</StyledPostItem>
 			</div>

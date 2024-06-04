@@ -9,14 +9,13 @@ function LikeButton({ feedId }) {
 	const isLogIn = useSelector((state) => state.user.isLogIn);
 	const newsfeeds = useSelector((state) => state.newsfeed.list);
 	const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
-	const { like, id } = selectFeed;
 
 	const handleLike = async () => {
 		if (isLogIn) {
 			setIsLike((prev) => !prev);
 			const newLike = {
-				id,
-				like: isLike ? like - 1 : like + 1
+				id: selectFeed.id,
+				like: isLike ? selectFeed.like - 1 : selectFeed.like + 1
 			};
 			dispatch(updateLike(newLike));
 			await updateNewsfeedLike(newLike);
@@ -34,7 +33,7 @@ function LikeButton({ feedId }) {
 			<button onClick={handleLike} style={style}>
 				하트
 			</button>
-			<span>{like || 0}</span>
+			<span>{selectFeed.like || 0}</span>
 		</StyledLikeBox>
 	);
 }
