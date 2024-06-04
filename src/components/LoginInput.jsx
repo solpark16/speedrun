@@ -1,3 +1,4 @@
+import { createSerializableStateInvariantMiddleware } from "@reduxjs/toolkit";
 import React from "react";
 import styled from "styled-components";
 
@@ -40,13 +41,23 @@ const PasswordInput = styled.input`
 	box-sizing: border-box;
 `;
 
-function LoginInput() {
+function LoginInput({ email, setEmail, password, setPassword }) {
 	return (
 		<>
 			<FormBox>
-				<InputForm type="email" placeholder="이메일을 입력해주세요" />
+				<InputForm
+					type="email"
+					placeholder="이메일을 입력해주세요"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+				/>
 			</FormBox>
-			<PasswordInput type="password" placeholder="비밀번호를 입력해주세요" />
+			<PasswordInput
+				type="password"
+				placeholder="비밀번호를 입력해주세요"
+				value={password}
+				onChange={(e) => setPassword(e.target.value)}
+			/>
 		</>
 	);
 }

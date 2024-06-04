@@ -4,6 +4,7 @@ import LoginInput from "../components/LoginInput";
 import LoginLinks from "../components/LoginLinks";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 const LoginBox = styled.div`
 	width: 1122px;
@@ -68,6 +69,10 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 
+	const handleLogin = async () => {
+		alert("회원가입으로 이동하세요");
+	};
+
 	return (
 		<>
 			<LoginHeader />
@@ -78,8 +83,8 @@ function Login() {
 					<StyledGoogleimg>Sign In With Google</StyledGoogleimg>
 				</StyledGoogleBox>
 				<StyledDivider />
-				<LoginInput />
-				<LoginButton />
+				<LoginInput email={email} setEmail={setEmail} password={password} setPassword={setPassword} />
+				<LoginButton onClick={handleLogin} />
 				<LoginLinks />
 			</LoginBox>
 		</>
