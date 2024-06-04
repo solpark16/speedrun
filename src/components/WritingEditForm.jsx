@@ -3,7 +3,7 @@ import styled from "styled-components";
 import supabase from "../supabase/supabase";
 import { useNavigate, useParams } from "react-router-dom";
 
-const TitleInput = styled.input`
+const StyledTitleInput = styled.input`
 	font-family: inherit;
 	font-weight: 800;
 	line-height: 48px;
@@ -23,7 +23,7 @@ const TitleInput = styled.input`
 	}
 `;
 
-const Form = styled.form`
+const StyledForm = styled.form`
 	display: flex;
 	flex-direction: column;
 `;
@@ -34,7 +34,7 @@ const StyledDiv = styled.div`
 	margin-bottom: 20px;
 `;
 
-const Input = styled.input`
+const StyledInput = styled.input`
 	font-family: inherit;
 	font-size: 30px;
 	font-weight: 500;
@@ -50,7 +50,7 @@ const Input = styled.input`
 	padding-left: 35px;
 `;
 
-const TextArea = styled.textarea`
+const StyledTextArea = styled.textarea`
 	font-family: inherit;
 	padding: 10px;
 	border: 5px solid #b4b9c9;
@@ -64,7 +64,7 @@ const TextArea = styled.textarea`
 	padding-left: 35px;
 `;
 
-const Button = styled.button`
+const StyledButton = styled.button`
 	font-family: inherit;
 	padding: 10px;
 	border: none;
@@ -131,9 +131,9 @@ function WritingEditForm() {
 	return (
 		<div>
 			<div className="container">
-				<Form onSubmit={handleSubmit}>
+				<StyledForm onSubmit={handleSubmit}>
 					<StyledDiv>
-						<TitleInput
+						<StyledTitleInput
 							type="text"
 							id="title"
 							name="title"
@@ -144,7 +144,7 @@ function WritingEditForm() {
 						<div style={{ borderBottom: "5px solid #b4b9c9", padding: "15px" }}></div>
 					</StyledDiv>
 					{/* <StyledDiv>
-						<Input
+						<StyledInput
 							type="text"
 							id="tags"
 							name="tags"
@@ -154,16 +154,16 @@ function WritingEditForm() {
 						/>
 					</StyledDiv> */}
 					<StyledDiv>
-						<TextArea
+						<StyledTextArea
 							id="content"
 							name="content"
 							placeholder="내용을 입력해주세요..."
 							value={formData.content}
 							onChange={handleChange}
-						></TextArea>
+						></StyledTextArea>
 					</StyledDiv>
-					<Button type="submit">수정하기</Button>
-				</Form>
+					<StyledButton type="submit">수정하기</StyledButton>
+				</StyledForm>
 			</div>
 		</div>
 	);
