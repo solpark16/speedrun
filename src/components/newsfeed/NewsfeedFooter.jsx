@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { addNewsfeedLike, getNewsfeedLike, removNewsfeedLike } from "../../api/feed";
+import { updateLike } from "../../redux/slices/newsfeed.slice";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 
 function NewsfeedFooter({ feedId }) {
+	const dispatch = useDispatch();
 	const newsfeeds = useSelector((state) => state.newsfeed.list);
 	const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
 	const [isLike, setIsLike] = useState(false);
@@ -36,6 +38,7 @@ function NewsfeedFooter({ feedId }) {
 			};
 			setIsLike((prev) => !prev);
 			setHeart((prev) => (isLike ? prev - 1 : prev + 1));
+			dispatch(updateLike(heart));
 			isLike ? await removNewsfeedLike(newLike) : await addNewsfeedLike(newLike);
 		} else {
 			alert("로그인이 필요합니다.");
