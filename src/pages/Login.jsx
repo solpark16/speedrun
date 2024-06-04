@@ -20,9 +20,9 @@ const StyledLoginBox = styled.div`
 
 const StyledLoginText = styled.h2`
 	color: #2c2b2f;
-	font-size: 45px;
-	font-weight: bold;
-	margin-bottom: 120px;
+	font-size: 48px;
+	font-weight: 800;
+	margin-bottom: 45px;
 `;
 
 const StyledDivider = styled.div`
