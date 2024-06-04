@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import supabase from "../supabase/supabase";
-import { useNavigate, useParams } from "react-router-dom";
 
 const StyledTitleInput = styled.input`
 	font-family: inherit;
