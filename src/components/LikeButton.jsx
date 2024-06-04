@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
 // import { updateLike } from "../redux/slices/newsfeed.slice";
-import { getNewsfeedLike, updateNewsfeedLike } from "../api/feed";
+import { addNewsfeedLike, getNewsfeedLike, removNewsfeedLike } from "../api/feed";
 function LikeButton({ feedId }) {
 	// const dispatch = useDispatch();
 	const [isLike, setIsLike] = useState(false);
@@ -11,19 +11,18 @@ function LikeButton({ feedId }) {
 
 	const getLike = async () => {
 		const like = await getNewsfeedLike(feedId);
-		setHeart(like[0].like);
+		setHeart(like.length);
 	};
 
 	const handleLike = async () => {
 		if (isLogIn) {
 			setIsLike((prev) => !prev);
 			const newLike = {
-				id: feedId,
-				like: isLike ? heart - 1 : heart + 1
+				userId: "testUserId",
+				feedId: feedId
 			};
 			setHeart((prev) => (isLike ? prev - 1 : prev + 1));
-			// dispatch(updateLike(newLike));
-			await updateNewsfeedLike(newLike);
+			isLike ? await removNewsfeedLike(newLike) : await addNewsfeedLike(newLike);
 		} else {
 			alert("로그인이 필요합니다.");
 		}

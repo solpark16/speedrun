@@ -12,13 +12,22 @@ export async function getSelectedNewsfeed(feedId) {
 	return newsfeed;
 }
 
-export async function getNewsfeedLike(id) {
-	const { data: like, error } = await supabase.from("newsfeed").select("like").eq("id", id);
+export async function getNewsfeedLike(feedId) {
+	const { data: like, error } = await supabase.from("like").select("*").eq("feedId", feedId);
 	if (error) throw error;
 	return like;
 }
 
-export async function updateNewsfeedLike({ like, id }) {
-	const { error } = await supabase.from("newsfeed").update({ like: like }).eq("id", id);
+export async function addNewsfeedLike({ userId, feedId }) {
+	const { error } = await supabase
+		.from("like")
+		.insert([{ userId: userId, feedId: feedId }])
+		.select();
+
+	if (error) throw error;
+}
+
+export async function removNewsfeedLike({ feedId }) {
+	const { error } = await supabase.from("like").delete().eq("feedId", feedId);
 	if (error) throw error;
 }
