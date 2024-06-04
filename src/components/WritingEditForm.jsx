@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import supabase from "../supabase/supabase";
 
 const TitleInput = styled.input`
 	font-family: inherit;
@@ -85,6 +87,14 @@ const Button = styled.button`
 `;
 
 function WritingEditForm() {
+	async function getSelectedNewsFeed() {
+		const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").eq("id", feedId);
+		console.log(newsfeed);
+	}
+	getSelectedNewsFeed();
+	// const newsfeed = useSelector((state) => state.newsfeed.list);
+	// console.log(newsfeed);
+
 	const [formData, setFormData] = useState({
 		title: "",
 		tags: "",
@@ -101,8 +111,6 @@ function WritingEditForm() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// 폼 제출 처리
-		console.log("Form Data:", formData);
 	};
 
 	return (
@@ -120,7 +128,7 @@ function WritingEditForm() {
 						/>
 						<div style={{ borderBottom: "5px solid #b4b9c9", padding: "15px" }}></div>
 					</StyledDiv>
-					<StyledDiv>
+					{/* <StyledDiv>
 						<Input
 							type="text"
 							id="tags"
@@ -129,7 +137,7 @@ function WritingEditForm() {
 							value={formData.tags}
 							onChange={handleChange}
 						/>
-					</StyledDiv>
+					</StyledDiv> */}
 					<StyledDiv>
 						<TextArea
 							id="body"

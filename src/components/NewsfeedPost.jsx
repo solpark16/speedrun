@@ -1,17 +1,13 @@
-import { styled } from "styled-components";
-import LikeButton from "./LikeButton";
-import ShareButton from "./ShareButton";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getInitalFeed } from "../redux/slices/newsfeed.slice";
-import { getNewsfeed } from "../utils/getNewsfeed";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { styled } from "styled-components";
 import supabase from "../supabase/supabase";
 import { getSelectedNewsfeed } from "../utils/getSelectedNewsfeed";
+import LikeButton from "./LikeButton";
+import ShareButton from "./ShareButton";
 
 const NewsfeedPost = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	const { feedId } = useParams();
 
 	const [post, setPost] = useState({});
@@ -31,7 +27,7 @@ const NewsfeedPost = () => {
 	const deletePostHandler = async () => {
 		const confirmDelete = confirm("정말 삭제하시겠습니까?");
 		if (confirmDelete) {
-			const { error } = await supabase.from("newsfeed").delete().eq("id", feedId);
+			await supabase.from("newsfeed").delete().eq("id", feedId);
 			navigate("/");
 		}
 	};
@@ -62,7 +58,7 @@ const NewsfeedPost = () => {
 
 					<StyledPostContent>{content}</StyledPostContent>
 					<StyledPostFooter>
-						<LikeButton />
+						<LikeButton feedId={feedId} />
 						<ShareButton />
 					</StyledPostFooter>
 				</StyledPostItem>

@@ -21,7 +21,7 @@ function NewsfeedList() {
 	}, []);
 
 	return (
-		<div>
+		<div className="newsfeed-list">
 			<div className="container">
 				<StyledNewsfeedList>
 					{newsfeedList.map((list) => {
@@ -31,8 +31,8 @@ function NewsfeedList() {
 									<ListItem title={list.title} content={list.content} date={list.date} userId={list.userId} />
 								</Link>
 								<StyledListFooter>
-									<LikeButton />
-									<ShareButton />
+									<LikeButton feedId={list.id} />
+									<ShareButton feedId={list.id} />
 								</StyledListFooter>
 							</li>
 						);
