@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
+import { getSelectedNewsfeed } from "../api/feed";
 import supabase from "../supabase/supabase";
-import { getSelectedNewsfeed } from "../utils/getSelectedNewsfeed";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 

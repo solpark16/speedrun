@@ -1,28 +1,37 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { updateLike } from "../redux/slices/newsfeed.slice";
-import { updateNewsfeedLike } from "../utils/getNewsfeed";
+// import { updateLike } from "../redux/slices/newsfeed.slice";
+import { getNewsfeedLike, updateNewsfeedLike } from "../api/feed";
 function LikeButton({ feedId }) {
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	const [isLike, setIsLike] = useState(false);
 	const isLogIn = useSelector((state) => state.user.isLogIn);
-	const newsfeeds = useSelector((state) => state.newsfeed.list);
-	const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
+	const [heart, setHeart] = useState(0);
+
+	const getLike = async () => {
+		const like = await getNewsfeedLike(feedId);
+		setHeart(like[0].like);
+	};
 
 	const handleLike = async () => {
 		if (isLogIn) {
 			setIsLike((prev) => !prev);
 			const newLike = {
-				id: selectFeed.id,
-				like: isLike ? selectFeed.like - 1 : selectFeed.like + 1
+				id: feedId,
+				like: isLike ? heart - 1 : heart + 1
 			};
-			dispatch(updateLike(newLike));
+			setHeart((prev) => (isLike ? prev - 1 : prev + 1));
+			// dispatch(updateLike(newLike));
 			await updateNewsfeedLike(newLike);
 		} else {
 			alert("로그인이 필요합니다.");
 		}
 	};
+
+	useEffect(() => {
+		getLike();
+	}, []);
 
 	const style = {
 		backgroundImage: isLike ? "url(/imgs/icon-heart-fill.png)" : "url(/imgs/icon-heart-empty.png)"
@@ -33,7 +42,7 @@ function LikeButton({ feedId }) {
 			<button onClick={handleLike} style={style}>
 				하트
 			</button>
-			<span>{selectFeed.like || 0}</span>
+			<span>{heart || 0}</span>
 		</StyledLikeBox>
 	);
 }

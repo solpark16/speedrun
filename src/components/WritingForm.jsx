@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { addNewsfeed } from "../redux/slices/newsfeed.slice";
 import { v4 as uuidv4 } from "uuid";
 import supabase from "../supabase/supabase";
-import { useNavigate } from "react-router-dom";
 
 const StyledTitleInput = styled.input`
 	font-family: inherit;
@@ -91,12 +89,13 @@ const StyledButton = styled.button`
 `;
 
 function WritingForm() {
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	const year = new Date().getFullYear();
+	const month = new Date().getMonth() + 1;
+	const day = new Date().getDate();
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
-		date: new Date().getDate(),
+		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
 		userId: "userId"
@@ -110,25 +109,21 @@ function WritingForm() {
 		});
 	};
 
-	async function add() {
-		const { data, error } = await supabase.from("newsfeed").insert([formData]).select();
+	async function addNewsfeed() {
+		await supabase.from("newsfeed").insert([formData]).select();
 	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
-		add();
-
-		dispatch(addNewsfeed(formData));
-
+		addNewsfeed();
 		navigate(-1);
 	};
 
-	async function getUserId(userId) {
-		const {
-			data: { user }
-		} = await supabase.auth.getUser(userId);
-	}
+	// async function getUserId(userId) {
+	// 	const {
+	// 		data: { user }
+	// 	} = await supabase.auth.getUser(userId);
+	// }
 
 	return (
 		<div>
