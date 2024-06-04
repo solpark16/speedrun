@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
 // import { updateLike } from "../redux/slices/newsfeed.slice";
-import { getNewsfeedLike, updateNewsfeedLike } from "../utils/getNewsfeed";
+import { getNewsfeedLike, updateNewsfeedLike } from "../api/feed";
 function LikeButton({ feedId }) {
 	// const dispatch = useDispatch();
 	const [isLike, setIsLike] = useState(false);
