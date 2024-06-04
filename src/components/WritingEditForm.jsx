@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import supabase from "../supabase/supabase";
 
-const TitleInput = styled.input`
+const StyledTitleInput = styled.input`
 	font-family: inherit;
 	font-weight: 800;
 	line-height: 48px;
@@ -23,7 +23,7 @@ const TitleInput = styled.input`
 	}
 `;
 
-const Form = styled.form`
+const StyledForm = styled.form`
 	display: flex;
 	flex-direction: column;
 `;
@@ -34,23 +34,23 @@ const StyledDiv = styled.div`
 	margin-bottom: 20px;
 `;
 
-const Input = styled.input`
-	font-family: inherit;
-	font-size: 30px;
-	font-weight: 500;
-	line-height: 48px;
-	text-align: left;
-	padding: 10px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	border: 4px solid #e7404a;
-	border-radius: 18px;
-	background-color: #333;
-	color: #fff; /* 흰색 글자 색상 */
-	padding-left: 35px;
-`;
+// const StyledInput = styled.input`
+// 	font-family: inherit;
+// 	font-size: 30px;
+// 	font-weight: 500;
+// 	line-height: 48px;
+// 	text-align: left;
+// 	padding: 10px;
+// 	margin-bottom: 10px;
+// 	margin-top: 10px;
+// 	border: 4px solid #e7404a;
+// 	border-radius: 18px;
+// 	background-color: #333;
+// 	color: #fff; /* 흰색 글자 색상 */
+// 	padding-left: 35px;
+// `;
 
-const TextArea = styled.textarea`
+const StyledTextArea = styled.textarea`
 	font-family: inherit;
 	padding: 10px;
 	border: 5px solid #b4b9c9;
@@ -64,7 +64,7 @@ const TextArea = styled.textarea`
 	padding-left: 35px;
 `;
 
-const Button = styled.button`
+const StyledButton = styled.button`
 	font-family: inherit;
 	padding: 10px;
 	border: none;
@@ -116,9 +116,9 @@ function WritingEditForm() {
 	return (
 		<div>
 			<div className="container">
-				<Form onSubmit={handleSubmit}>
+				<StyledForm onSubmit={handleSubmit}>
 					<StyledDiv>
-						<TitleInput
+						<StyledTitleInput
 							type="text"
 							id="title"
 							name="title"
@@ -139,16 +139,16 @@ function WritingEditForm() {
 						/>
 					</StyledDiv> */}
 					<StyledDiv>
-						<TextArea
+						<StyledTextArea
 							id="body"
 							name="body"
 							placeholder="내용을 입력해주세요..."
 							value={formData.body}
 							onChange={handleChange}
-						></TextArea>
+						></StyledTextArea>
 					</StyledDiv>
-					<Button type="submit">수정하기</Button>
-				</Form>
+					<StyledButton type="submit">수정하기</StyledButton>
+				</StyledForm>
 			</div>
 		</div>
 	);
