@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getLoginUser } from "../api/auth";
-import { logInToggle } from "../redux/slices/user.slice";
+import { getLoginUser } from "../../api/auth";
+import { logInToggle, setCurrentUser } from "../../redux/slices/user.slice";
 import LoginButton from "./LoginButton";
 
 const StyledFormBox = styled.form`
@@ -63,8 +63,14 @@ function LoginInput() {
 		};
 		const userData = await getLoginUser(loginInfo);
 		setUser(userData.user);
-		dispatch(logInToggle(true));
-		navigate(-1);
+
+		if (userData) {
+			dispatch(logInToggle(true));
+			dispatch(setCurrentUser(userData.user));
+			navigate(-1);
+		} else {
+			alert("로그인에 실패했습니다.");
+		}
 	};
 
 	return (

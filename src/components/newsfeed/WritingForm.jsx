@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import supabase from "../supabase/supabase";
+import { v4 as uuidv4 } from "uuid";
+import supabase from "../../supabase/supabase";
 
 const StyledTitleInput = styled.input`
 	font-family: inherit;
@@ -34,7 +35,7 @@ const StyledDiv = styled.div`
 	margin-bottom: 20px;
 `;
 
-// const StyledInput = styled.input`
+// const Input = styled.input`
 // 	font-family: inherit;
 // 	font-size: 30px;
 // 	font-weight: 500;
@@ -75,39 +76,30 @@ const StyledButton = styled.button`
 	cursor: pointer;
 	width: 187px;
 	margin-top: 25px;
+	margin-bottom: 45px;
 	padding: 14px 18px 14px 18px;
 	gap: 3px;
 	border-radius: 6px;
 	opacity: 0px;
 	margin-left: 0;
-	margin-bottom: 45px;
 
 	&:hover {
 		background-color: #d9534f; /* 호버 시 더 어두운 빨간색 */
 	}
 `;
 
-function WritingEditForm() {
-	const { feedId } = useParams();
+function WritingForm() {
 	const navigate = useNavigate();
-
+	const year = new Date().getFullYear();
+	const month = new Date().getMonth() + 1;
+	const day = new Date().getDate();
 	const [formData, setFormData] = useState({
+		id: uuidv4(),
+		date: `${year}/${month}/${day}`,
 		title: "",
-		content: ""
+		content: "",
+		userId: "userId"
 	});
-
-	async function getSelectedNewsFeed() {
-		const { data } = await supabase.from("newsfeed").select("*").eq("id", feedId);
-		const { title, content } = data[0];
-		setFormData({
-			title,
-			content
-		});
-	}
-
-	useEffect(() => {
-		getSelectedNewsFeed();
-	}, []);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -117,17 +109,21 @@ function WritingEditForm() {
 		});
 	};
 
-	const handleSubmit = async (e) => {
+	async function addNewsfeed() {
+		await supabase.from("newsfeed").insert([formData]).select();
+	}
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		await supabase
-			.from("newsfeed")
-			.update({
-				title: formData.title,
-				content: formData.content
-			})
-			.eq("id", feedId);
-		navigate(`/feed-read/${feedId}`);
+		addNewsfeed();
+		navigate(-1);
 	};
+
+	// async function getUserId(userId) {
+	// 	const {
+	// 		data: { user }
+	// 	} = await supabase.auth.getUser(userId);
+	// }
 
 	return (
 		<div>
@@ -136,7 +132,6 @@ function WritingEditForm() {
 					<StyledDiv>
 						<StyledTitleInput
 							type="text"
-							id="title"
 							name="title"
 							placeholder="제목을 입력하세요"
 							value={formData.title}
@@ -145,7 +140,7 @@ function WritingEditForm() {
 						<div style={{ borderBottom: "5px solid #b4b9c9", padding: "15px" }}></div>
 					</StyledDiv>
 					{/* <StyledDiv>
-						<StyledInput
+						<Input
 							type="text"
 							id="tags"
 							name="tags"
@@ -156,18 +151,17 @@ function WritingEditForm() {
 					</StyledDiv> */}
 					<StyledDiv>
 						<StyledTextArea
-							id="content"
 							name="content"
 							placeholder="내용을 입력해주세요..."
 							value={formData.content}
 							onChange={handleChange}
 						></StyledTextArea>
 					</StyledDiv>
-					<StyledButton type="submit">수정하기</StyledButton>
+					<StyledButton type="submit">저장하기</StyledButton>
 				</StyledForm>
 			</div>
 		</div>
 	);
 }
 
-export default WritingEditForm;
+export default WritingForm;
