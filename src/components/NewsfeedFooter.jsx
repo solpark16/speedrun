@@ -5,7 +5,7 @@ import { addNewsfeedLike, getNewsfeedLike, removNewsfeedLike } from "../api/feed
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 
-function NewsfeedPostFooter({ feedId }) {
+function NewsfeedFooter({ feedId }) {
 	const newsfeeds = useSelector((state) => state.newsfeed.list);
 	const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
 	const [isLike, setIsLike] = useState(false);
@@ -51,4 +51,4 @@ const StyledPostFooter = styled.div`
 	display: flex;
 	justify-content: space-between;
 `;
-export default NewsfeedPostFooter;
+export default NewsfeedFooter;

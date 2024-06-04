@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { getSelectedNewsfeed } from "../api/feed";
 import supabase from "../supabase/supabase";
-import NewsfeedPostFooter from "./NewsfeedFooter";
+import NewsfeedFooter from "./NewsfeedFooter";
 
 const NewsfeedPost = () => {
 	const navigate = useNavigate();
@@ -56,7 +56,7 @@ const NewsfeedPost = () => {
 					</StyledPostHeader>
 
 					<StyledPostContent>{content}</StyledPostContent>
-					<NewsfeedPostFooter feedId={id} />
+					<NewsfeedFooter feedId={id} />
 				</StyledPostItem>
 			</div>
 		</StyledNewsfeedPost>
