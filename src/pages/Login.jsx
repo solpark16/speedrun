@@ -1,10 +1,7 @@
-import LoginButton from "../components/LoginButton";
+import styled from "styled-components";
 import LoginHeader from "../components/LoginHeader";
 import LoginInput from "../components/LoginInput";
 import LoginLinks from "../components/LoginLinks";
-import React, { useState } from "react";
-import styled from "styled-components";
-import { SupabaseClient } from "@supabase/supabase-js";
 
 const StyledLoginBox = styled.div`
 	width: 1122px;
@@ -65,10 +62,6 @@ const StyledGoogleimg = styled.div`
 `;
 
 function Login() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [error, setError] = useState("");
-
 	return (
 		<>
 			<LoginHeader />
@@ -79,8 +72,7 @@ function Login() {
 					<StyledGoogleimg>Sign In With Google</StyledGoogleimg>
 				</StyledGoogleBox>
 				<StyledDivider />
-				<LoginInput email={email} setEmail={setEmail} password={password} setPassword={setPassword} />
-				<LoginButton />
+				<LoginInput />
 				<LoginLinks />
 			</StyledLoginBox>
 		</>

@@ -3,8 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { getSelectedNewsfeed } from "../api/feed";
 import supabase from "../supabase/supabase";
-import LikeButton from "./LikeButton";
-import ShareButton from "./ShareButton";
+import NewsfeedPostFooter from "./NewsfeedFooter";
 
 const NewsfeedPost = () => {
 	const navigate = useNavigate();
@@ -57,10 +56,7 @@ const NewsfeedPost = () => {
 					</StyledPostHeader>
 
 					<StyledPostContent>{content}</StyledPostContent>
-					<StyledPostFooter>
-						<LikeButton feedId={feedId} />
-						<ShareButton feedId={feedId} />
-					</StyledPostFooter>
+					<NewsfeedPostFooter feedId={id} />
 				</StyledPostItem>
 			</div>
 		</StyledNewsfeedPost>
@@ -126,8 +122,5 @@ const StyledPostContent = styled.div`
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 `;
-const StyledPostFooter = styled.div`
-	display: flex;
-	justify-content: space-between;
-`;
+
 export default NewsfeedPost;

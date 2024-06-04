@@ -1,26 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { RouterProvider } from "react-router-dom";
+import { logInToggle, setCurrentUser } from "./redux/slices/user.slice";
 import router from "./routes/router";
 import GlobalStyle from "./style/GlobalStyle";
 import supabase from "./supabase/supabase";
 
 function App() {
-	const [user, setUser] = useState(null);
-
-	console.log(user);
+	const dispatch = useDispatch();
 	useEffect(() => {
 		const {
 			data: { subscription }
-		} = supabase.auth.onAuthStateChange((_event, session) => {
+		} = supabase.auth.onAuthStateChange((_, session) => {
 			if (session) {
-				console.log(session);
-				setUser(session.user);
+				dispatch(logInToggle(true));
+				dispatch(setCurrentUser(session.user));
 			} else {
-				setUser(null);
+				dispatch(logInToggle(false));
+				dispatch(setCurrentUser(null));
 			}
-			console.log(subscription);
 		});
-
 		return () => subscription.unsubscribe();
 	}, []);
 	return (

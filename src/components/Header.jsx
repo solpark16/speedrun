@@ -1,18 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { logInToggle } from "../redux/slices/user.slice";
+import { logInToggle, setCurrentUser } from "../redux/slices/user.slice";
 
 function Header() {
-	const navigate = useNavigate();
 	const isLogIn = useSelector((state) => state.user.isLogIn);
+	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const dispatch = useDispatch();
-	const handleLogIn = () => {
-		dispatch(logInToggle(true));
-		navigate("/login");
-	};
 	const handleLogOut = () => {
 		dispatch(logInToggle(false));
+		dispatch(setCurrentUser(null));
 	};
 
 	return (
@@ -29,11 +26,15 @@ function Header() {
 							<>
 								<StyledLoginButton onClick={handleLogOut}>LogOut</StyledLoginButton>
 								<StyledMypageButton>
-									<Link to="/my-page/:userId">마이페이지</Link>
+									<Link to={`/my-page/${currentUser?.id}`}>마이페이지</Link>
 								</StyledMypageButton>
 							</>
 						)}
-						{!isLogIn && <StyledLoginButton onClick={handleLogIn}>LogIn</StyledLoginButton>}
+						{!isLogIn && (
+							<Link to="/login">
+								<StyledLoginButton>LogIn</StyledLoginButton>
+							</Link>
+						)}
 					</div>
 				</StyledHeaderBox>
 			</div>
