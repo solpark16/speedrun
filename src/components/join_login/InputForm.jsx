@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import supabase from "../../supabase/supabase";
+import { signUp } from "../../api/auth";
 
 function InputForm() {
 	let navigate = useNavigate();
@@ -24,8 +24,7 @@ function InputForm() {
 		}
 
 		try {
-			// Supabase 회원가입 로직
-			const { error } = await supabase.auth.signUp({
+			const newUserInfo = {
 				email: email,
 				password: password,
 				options: {
@@ -33,8 +32,8 @@ function InputForm() {
 						display_name: displayName
 					}
 				}
-			});
-
+			};
+			const error = await signUp(newUserInfo);
 			if (error) {
 				alert(error.message);
 			} else {
