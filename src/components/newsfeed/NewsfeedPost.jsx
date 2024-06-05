@@ -56,7 +56,7 @@ const NewsfeedPost = () => {
 					</StyledPostHeader>
 
 					<StyledPostContent>{content}</StyledPostContent>
-					<NewsfeedFooter feedId={id} />
+					<NewsfeedFooter feedId={feedId} />
 				</StyledPostItem>
 			</div>
 		</StyledNewsfeedPost>

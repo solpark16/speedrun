@@ -122,12 +122,6 @@ function WritingForm() {
 		navigate(-1);
 	};
 
-	// async function getUserId(userId) {
-	// 	const {
-	// 		data: { user }
-	// 	} = await supabase.auth.getUser(userId);
-	// }
-
 	return (
 		<div>
 			<div className="container">
