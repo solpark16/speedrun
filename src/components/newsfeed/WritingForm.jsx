@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -79,9 +79,12 @@ function WritingForm() {
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
 	const { email, id: userId } = useSelector((state) => state.user.currentUserInfo);
-	console.log(useSelector((state) => state.user.currentUserInfo));
 	const userName = email?.split("@")[0] || "anonymous";
-
+	const [profileUrl, setProfileUrl] = useState("");
+	async function getProfileImage() {
+		const { data } = await supabase.from("profiles").select("*").eq("userId", userId);
+		setProfileUrl(data[0].image_url);
+	}
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
@@ -89,13 +92,14 @@ function WritingForm() {
 		content: "",
 		userName: userName,
 		userId: userId,
-		profileUrl: "https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/avatar_1717566216627.png"
+		profileUrl: ""
 	});
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({
 			...formData,
+			profileUrl,
 			[name]: value
 		});
 	};
@@ -113,6 +117,10 @@ function WritingForm() {
 		addNewsfeed();
 		navigate(-1);
 	};
+
+	useEffect(() => {
+		getProfileImage();
+	}, []);
 
 	return (
 		<div>

@@ -7,6 +7,8 @@ import supabase from "../../supabase/supabase";
 import NewsfeedFooter from "./NewsfeedFooter";
 
 const NewsfeedPost = () => {
+	const currentUser = useSelector((state) => state.user.currentUserInfo);
+	console.log(currentUser.id);
 	const navigate = useNavigate();
 	const { feedId } = useParams();
 	const isLogIn = useSelector((state) => state.user.isLogIn);
@@ -22,7 +24,7 @@ const NewsfeedPost = () => {
 	}, []);
 
 	const { id, title, userId, userName, date, content, profileUrl } = post;
-	console.log(profileUrl);
+	console.log(userId);
 	// 게시물 삭제 핸들러
 	const deletePostHandler = async () => {
 		const confirmDelete = confirm("정말 삭제하시겠습니까?");
@@ -49,7 +51,7 @@ const NewsfeedPost = () => {
 							</StyledInfoBox>
 						</StyledPostHeaderTop>
 						<StyledPostHeaderBottom>
-							{isLogIn ? (
+							{isLogIn && currentUser.id === userId ? (
 								<>
 									<Link to={`/feed-edit/${id}`}>
 										<StyledButton>수정하기</StyledButton>
@@ -95,8 +97,12 @@ const StyledPostHeaderBottom = styled.div`
 const StyledImgBox = styled.div`
 	width: 96px;
 	height: 96px;
+	overflow: hidden;
+	border-radius: 50%;
 	img {
 		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 `;
 const StyledInfoBox = styled.div`
