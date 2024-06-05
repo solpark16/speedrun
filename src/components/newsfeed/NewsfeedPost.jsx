@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { getSelectedNewsfeed } from "../../api/feed";
@@ -8,7 +9,7 @@ import NewsfeedFooter from "./NewsfeedFooter";
 const NewsfeedPost = () => {
 	const navigate = useNavigate();
 	const { feedId } = useParams();
-
+	const isLogIn = useSelector((state) => state.user.isLogIn);
 	const [post, setPost] = useState({});
 
 	async function getPost() {
@@ -36,7 +37,7 @@ const NewsfeedPost = () => {
 			<div className="container">
 				<StyledPostItem>
 					<StyledPostHeader>
-						<StyledPostHeaderLeft>
+						<StyledPostHeaderTop>
 							<StyledImgBox>
 								<img src="/imgs/default-user-profile.png" alt="유저 아이디" />
 							</StyledImgBox>
@@ -46,13 +47,19 @@ const NewsfeedPost = () => {
 									<span>{userId}</span> | <span>{date}</span>
 								</div>
 							</StyledInfoBox>
-						</StyledPostHeaderLeft>
-						<div>
-							<Link to={`/feed-edit/${id}`}>
-								<StyledButton>수정하기</StyledButton>
-							</Link>
-							<StyledButton onClick={() => deletePostHandler()}>삭제하기</StyledButton>
-						</div>
+						</StyledPostHeaderTop>
+						<StyledPostHeaderBottom>
+							{isLogIn ? (
+								<>
+									<Link to={`/feed-edit/${id}`}>
+										<StyledButton>수정하기</StyledButton>
+									</Link>
+									<StyledButton onClick={() => deletePostHandler()}>삭제하기</StyledButton>
+								</>
+							) : (
+								<></>
+							)}
+						</StyledPostHeaderBottom>
 					</StyledPostHeader>
 
 					<StyledPostContent>{content}</StyledPostContent>
@@ -73,9 +80,15 @@ const StyledPostItem = styled.div`
 
 const StyledPostHeader = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
+	gap: 24px;
 `;
-const StyledPostHeaderLeft = styled.div`
+const StyledPostHeaderTop = styled.div`
+	display: flex;
+	gap: 24px;
+`;
+const StyledPostHeaderBottom = styled.div`
 	display: flex;
 	gap: 24px;
 `;
@@ -101,7 +114,6 @@ const StyledButton = styled.button`
 	font-size: 20px;
 	border-radius: 9px;
 	border: none;
-	margin-left: 23px;
 	font: inherit;
 `;
 const StyledListTitle = styled.div`
