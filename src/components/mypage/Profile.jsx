@@ -8,7 +8,6 @@ const Profile = () => {
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const { userId } = useParams();
 	const [profileUrl, setProfileUrl] = useState("");
-	const [profileObj, setProfileObj] = useState({});
 	const [description, setDescription] = useState("");
 	async function getImage() {
 		// profiles에서 이미지 및 description 데이터 가져오기
@@ -24,7 +23,6 @@ const Profile = () => {
 		event.preventDefault();
 
 		const fileObj = event.target.files[0];
-		setProfileObj(fileObj);
 		const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, fileObj);
 		setProfileUrl(`https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`);
 		//업데이트 시키기
