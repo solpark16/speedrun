@@ -90,7 +90,6 @@ const StyledButton = styled.button`
 function WritingEditForm() {
 	const { feedId } = useParams();
 	const navigate = useNavigate();
-
 	const [formData, setFormData] = useState({
 		title: "",
 		content: ""
@@ -144,16 +143,6 @@ function WritingEditForm() {
 						/>
 						<div style={{ borderBottom: "5px solid #b4b9c9", padding: "15px" }}></div>
 					</StyledDiv>
-					{/* <StyledDiv>
-						<StyledInput
-							type="text"
-							id="tags"
-							name="tags"
-							placeholder="태그를 입력해주세요..."
-							value={formData.tags}
-							onChange={handleChange}
-						/>
-					</StyledDiv> */}
 					<StyledDiv>
 						<StyledTextArea
 							id="content"

@@ -12,5 +12,5 @@ export const newsfeedSlice = createSlice({
 	}
 });
 
-export const { getInitalFeed, updateLike, setIsLike } = newsfeedSlice.actions;
+export const { getInitalFeed } = newsfeedSlice.actions;
 export default newsfeedSlice.reducer;

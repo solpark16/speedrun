@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -20,7 +19,7 @@ function LoginLinks() {
 	return (
 		<>
 			<StyledLoginLink>
-				You haven't any accout? <StyledJoinLink to="/Join">Sign Up</StyledJoinLink>
+				You haven't any accout? <StyledJoinLink to="/join">Sign Up</StyledJoinLink>
 			</StyledLoginLink>
 			;
 		</>

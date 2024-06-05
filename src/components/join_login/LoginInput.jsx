@@ -68,7 +68,6 @@ function LoginInput() {
 		};
 		const userData = await getLoginUser(loginInfo);
 		setUser(userData.user);
-
 		if (userData) {
 			dispatch(logInToggle(true));
 			dispatch(setCurrentUser(userData.user));
@@ -77,8 +76,6 @@ function LoginInput() {
 			alert("로그인에 실패했습니다.");
 		}
 	};
-
-	console.log(user);
 
 	return (
 		<>

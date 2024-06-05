@@ -7,7 +7,7 @@ export async function getNewsfeedByDate() {
 }
 
 export async function getNewsfeedByUserId(userId) {
-	const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").eq("userId", userId);
+	const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").eq("userid", userId);
 	if (error) throw error;
 	return newsfeed;
 }

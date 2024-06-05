@@ -82,7 +82,7 @@ function WritingForm() {
 	const userName = email?.split("@")[0] || "anonymous";
 	const [profileUrl, setProfileUrl] = useState("");
 	async function getProfileImage() {
-		const { data } = await supabase.from("profiles").select("*").eq("userId", userId);
+		const { data } = await supabase.from("profiles").select("*").eq("userid", userId);
 		setProfileUrl(data[0].image_url);
 	}
 	const [formData, setFormData] = useState({
@@ -91,8 +91,8 @@ function WritingForm() {
 		title: "",
 		content: "",
 		userName: userName,
-		userId: userId,
-		profileUrl: ""
+		userid: userId,
+		profileUrl
 	});
 
 	const handleChange = (e) => {

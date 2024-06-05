@@ -71,7 +71,6 @@ function Login() {
 				{/* <StyledGoogleBox>
 					<StyledGoogleimg>Sign In With Google</StyledGoogleimg>
 				</StyledGoogleBox> */}
-				<StyledDivider />
 				<LoginInput />
 				<LoginLinks />
 			</StyledLoginBox>

@@ -8,7 +8,6 @@ import NewsfeedFooter from "./NewsfeedFooter";
 
 const NewsfeedPost = () => {
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
-	console.log(currentUser.id);
 	const navigate = useNavigate();
 	const { feedId } = useParams();
 	const isLogIn = useSelector((state) => state.user.isLogIn);
@@ -23,8 +22,8 @@ const NewsfeedPost = () => {
 		getPost();
 	}, []);
 
-	const { id, title, userId, userName, date, content, profileUrl } = post;
-	console.log(userId);
+	const { id, title, userid, userName, date, content, profileUrl } = post;
+
 	// 게시물 삭제 핸들러
 	const deletePostHandler = async () => {
 		const confirmDelete = confirm("정말 삭제하시겠습니까?");
@@ -51,7 +50,7 @@ const NewsfeedPost = () => {
 							</StyledInfoBox>
 						</StyledPostHeaderTop>
 						<StyledPostHeaderBottom>
-							{isLogIn && currentUser.id === userId ? (
+							{isLogIn && currentUser.id === userid ? (
 								<>
 									<Link to={`/feed-edit/${id}`}>
 										<StyledButton>수정하기</StyledButton>

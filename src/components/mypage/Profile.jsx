@@ -12,7 +12,7 @@ const Profile = () => {
 	const [description, setDescription] = useState("");
 	async function getImage() {
 		// profiles에서 이미지 및 description 데이터 가져오기
-		const { data } = await supabase.from("profiles").select("*").eq("userId", userId);
+		const { data } = await supabase.from("profiles").select("*").eq("userid", userId);
 		setProfileUrl(data[0].image_url);
 		setDescription(data[0].description);
 	}
@@ -33,7 +33,7 @@ const Profile = () => {
 			.update({
 				image_url: `https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`
 			})
-			.eq("userId", userId)
+			.eq("userid", userId)
 			.select();
 	};
 
