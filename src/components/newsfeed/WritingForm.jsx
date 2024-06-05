@@ -36,23 +36,6 @@ const StyledDiv = styled.div`
 	flex-direction: column;
 	margin-bottom: 20px;
 `;
-
-// const Input = styled.input`
-// 	font-family: inherit;
-// 	font-size: 30px;
-// 	font-weight: 500;
-// 	line-height: 48px;
-// 	text-align: left;
-// 	padding: 10px;
-// 	margin-bottom: 10px;
-// 	margin-top: 10px;
-// 	border: 4px solid #e7404a;
-// 	border-radius: 18px;
-// 	background-color: #333;
-// 	color: #fff; /* 흰색 글자 색상 */
-// 	padding-left: 35px;
-// `;
-
 const StyledTextArea = styled.textarea`
 	font-family: inherit;
 	padding: 10px;
@@ -92,21 +75,20 @@ const StyledButton = styled.button`
 
 function WritingForm() {
 	const navigate = useNavigate();
-	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
-	console.log(currentUser);
-	// const userId = currentUser.email.split("@")[0];
+	const { email } = useSelector((state) => state.user.currentUserInfo);
+	const userId = email?.split("@")[0] || "anonymous";
+
+	console.log(userId);
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
-		userId: "test"
+		userId
 	});
-
-	const [error, setError] = useState("");
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -123,20 +105,12 @@ function WritingForm() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (!formData.title.trim() || !formData.content.trim()) {
-			setError("제목과 내용을 모두 입력해야 합니다.");
 			Swal.fire("제목과 내용을 모두 입력해야 합니다.");
 			return;
 		}
-		setError("");
 		addNewsfeed();
 		navigate(-1);
 	};
-
-	// async function getUserId(userId) {
-	// 	const {
-	// 		data: { user }
-	// 	} = await supabase.auth.getUser(userId);
-	// }
 
 	return (
 		<div>
@@ -152,16 +126,7 @@ function WritingForm() {
 						/>
 						<div style={{ borderBottom: "5px solid #b4b9c9", padding: "15px" }}></div>
 					</StyledDiv>
-					{/* <StyledDiv>
-						<Input
-							type="text"
-							id="tags"
-							name="tags"
-							placeholder="태그를 입력해주세요..."
-							value={formData.tags}
-							onChange={handleChange}
-						/>
-					</StyledDiv> */}
+
 					<StyledDiv>
 						<StyledTextArea
 							name="content"
