@@ -2,28 +2,46 @@ import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import supabase from "../../supabase/supabase";
 import ProfileUpdateButton from "./ProfileUpdateButton";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
+	const { userId } = useParams();
 	const [profileUrl, setProfileUrl] = useState("");
 	const [profileObj, setProfileObj] = useState({});
 	async function getImage() {
-		const { data } = supabase.storage.from("avatars").getPublicUrl("default-user-profile.png");
-		setProfileUrl(data.publicUrl);
-		console.log(profileUrl);
+		// const { data } = supabase.storage.from("avatars").getPublicUrl("default-user-profile.png");
+		// profiles에서 이미지 및 description 데이터 가져오기
+		const { data } = await supabase.from("profiles").select("*").eq("userId", userId);
+		console.log(data);
+		setProfileUrl(data[0].image_url);
 	}
 	useEffect(() => {
 		getImage();
 	}, []);
 
 	const handleImageChange = async (event) => {
+		event.preventDefault();
+
+		//업데이트 시키기
+		const { error } = await supabase
+			.from("profiles")
+			.update({
+				description: "ddd",
+				updated_at: Date.now()
+			})
+			.eq("userId", userId)
+			.select();
+		if (error) {
+			console.log(error);
+		}
+
 		const fileObj = event.target.files[0];
 		setProfileObj(fileObj);
-		console.log(fileObj);
 		const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, fileObj);
 		setProfileUrl(`https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/${data.path}`);
-
-		// const { data, error } = await supabase.storage.from("avatars").upload("public/avatar1.png", fileObj);
 	};
+
 	return (
 		<StyledProfileBanner>
 			<div className="container">
@@ -40,7 +58,7 @@ const Profile = () => {
 						<StyledImageChangeInput type="file" name="file" id="file" onChange={handleImageChange} />
 					</StyledProfileImgBox>
 					<div>
-						<StyledProfileId>아이디</StyledProfileId>
+						{/* <StyledProfileId>{currentUser.user_metadata.display_name}</StyledProfileId> */}
 						<StyledProfileContext>
 							Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam
 							neque ultrices.Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit

@@ -6,7 +6,6 @@ import styled from "styled-components";
 import LoginJoinHeader from "../components/join_login/LoginJoinHeader";
 function Description() {
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
-	console.log(currentUser);
 	const [image, setImage] = useState(null);
 	const [imageUrl, setImageUrl] = useState("");
 	const [description, setDescription] = useState("");
@@ -37,7 +36,7 @@ function Description() {
 			description,
 			userId: currentUser.id
 		});
-		// navigate("/login");
+		navigate("/login");
 	};
 
 	return (
