@@ -64,14 +64,8 @@ function LoginInput() {
 			if (email === "email" && password === "password") {
 				alert("로그인 성공");
 			} else {
-				alert("등록된 회원이 아닙니다");
+				alert("이메일 또는 비밀번호가 잘못되었습니다.");
 			}
-		}
-
-		if (email === "emall" && password === "password") {
-			alert("로그인 성공");
-		} else {
-			alert("이메일 또는 비밀번호가 잘못되었습니다.");
 		}
 
 		const loginInfo = {
