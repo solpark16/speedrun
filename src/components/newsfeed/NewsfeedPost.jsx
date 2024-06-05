@@ -95,8 +95,12 @@ const StyledPostHeaderBottom = styled.div`
 const StyledImgBox = styled.div`
 	width: 96px;
 	height: 96px;
+	overflow: hidden;
+	border-radius: 50%;
 	img {
 		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 `;
 const StyledInfoBox = styled.div`
