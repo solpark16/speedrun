@@ -4,49 +4,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getLoginUser } from "../../api/auth";
 import { logInToggle, setCurrentUser } from "../../redux/slices/user.slice";
-import LoginButton from "./LoginButton";
-
-const StyledFormBox = styled.form`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-`;
-
-const StyledInputForm = styled.input`
-	font-family: inherit;
-	width: 675px;
-	height: 68px;
-	margin-bottom: 40px;
-	border-radius: 11px;
-	border: 1px solid #b4b9c9;
-	color: #343434;
-	font-size: 20px;
-	padding-left: 70px;
-	background-image: url("/imgs/icon-e-mail.png");
-	background-repeat: no-repeat;
-	background-size: 27px 27px;
-	background-position: 27px center;
-	box-sizing: border-box;
-`;
-
-const StyledPasswordInput = styled.input`
-	font-family: inherit;
-	width: 675px;
-	height: 68px;
-	margin-bottom: 40px;
-	border-radius: 11px;
-	border: 1px solid #b4b9c9;
-	color: #343434;
-	font-size: 20px;
-	padding-left: 70px;
-
-	background-image: url("/imgs/icon-lock.png");
-	background-repeat: no-repeat;
-	background-size: 27px 27px;
-	background-position: 27px center;
-	box-sizing: border-box;
-`;
 
 function LoginInput() {
 	const dispatch = useDispatch();
@@ -89,7 +46,7 @@ function LoginInput() {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<LoginButton />
+					<StyledButtonLogin type="submit">Sign in</StyledButtonLogin>;
 				</StyledFormBox>
 			) : (
 				<div>이미 로그인 되었습니다.</div>
@@ -97,5 +54,57 @@ function LoginInput() {
 		</>
 	);
 }
+const StyledFormBox = styled.form`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+`;
 
+const StyledInputForm = styled.input`
+	font-family: inherit;
+	width: 675px;
+	height: 68px;
+	margin-bottom: 40px;
+	border-radius: 11px;
+	border: 1px solid #b4b9c9;
+	color: #343434;
+	font-size: 20px;
+	padding-left: 70px;
+	background-image: url("/imgs/icon-e-mail.png");
+	background-repeat: no-repeat;
+	background-size: 27px 27px;
+	background-position: 27px center;
+	box-sizing: border-box;
+`;
+
+const StyledPasswordInput = styled.input`
+	font-family: inherit;
+	width: 675px;
+	height: 68px;
+	margin-bottom: 40px;
+	border-radius: 11px;
+	border: 1px solid #b4b9c9;
+	color: #343434;
+	font-size: 20px;
+	padding-left: 70px;
+
+	background-image: url("/imgs/icon-lock.png");
+	background-repeat: no-repeat;
+	background-size: 27px 27px;
+	background-position: 27px center;
+	box-sizing: border-box;
+`;
+
+const StyledButtonLogin = styled.button`
+	width: 674px;
+	height: 67px;
+	background-color: #e7404a;
+	color: #fff;
+	border: none;
+	border-radius: 12px;
+	font-size: 25px;
+	font-weight: 500;
+	cursor: pointer;
+`;
 export default LoginInput;
