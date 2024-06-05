@@ -5,9 +5,7 @@ import { styled } from "styled-components";
 function WriteButton() {
 	const isLogIn = useSelector((state) => state.user.isLogIn);
 
-	if (!isLogIn) {
-		return <></>;
-	} else {
+	if (isLogIn) {
 		return (
 			<StyledWriteButton>
 				<Link to="/feed-write">
@@ -15,6 +13,8 @@ function WriteButton() {
 				</Link>
 			</StyledWriteButton>
 		);
+	} else {
+		return <></>;
 	}
 }
 

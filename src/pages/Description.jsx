@@ -27,6 +27,8 @@ function Description() {
 		navigate("/login");
 	};
 
+	console.log("hello");
+
 	return (
 		<>
 			<LoginJoinHeader />
@@ -56,7 +58,7 @@ function Description() {
 						placeholder="당신이 좋아하는 것에 대해 적어보세요."
 					/>
 					<SubmitButton type="submit" onClick={handleSubmit}>
-						가입하기
+						시작하기
 					</SubmitButton>
 				</StyledDescriptionBg>
 			</div>

@@ -23,6 +23,9 @@ const InputField = styled.input`
 		border-color: #667788;
 	}
 `;
+const InputFieldUser = styled(InputField)`
+	background-image: url("/imgs/icon-user.png");
+`;
 
 const InputFieldEmail = styled(InputField)`
 	background-image: url("/imgs/icon-e-mail.png");
@@ -64,6 +67,11 @@ function InputForm() {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
+		if (displayName == "") {
+			alert("사용자 이름이 입력되지 않았습니다.");
+			return;
+		}
+
 		if (password !== confirmPassword) {
 			alert("비밀번호가 일치하지 않습니다.");
 			return;
@@ -101,7 +109,7 @@ function InputForm() {
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
 			/>
-			<InputField
+			<InputFieldUser
 				type="text"
 				placeholder="사용자 이름을 입력해주세요"
 				value={displayName}

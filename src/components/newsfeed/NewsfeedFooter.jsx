@@ -60,7 +60,7 @@ function NewsfeedFooter({ feedId }) {
 	};
 
 	const handleShare = () => {
-		window.prompt("복사하여 사용하세요.", `http://speedrun-virid.vercel.app/feed-read/${selectFeed.id}`);
+		window.prompt("복사하여 사용하세요.", `http://speedrun-virid.vercel.app/feed-read/${feedId}`);
 	};
 	return (
 		<StyledPostFooter>
