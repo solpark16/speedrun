@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import { getSelectedNewsfeed } from "../../api/feed";
 import supabase from "../../supabase/supabase";
 import NewsfeedFooter from "./NewsfeedFooter";
+import { useSelector } from "react-redux";
 
 const NewsfeedPost = () => {
 	const navigate = useNavigate();
@@ -20,8 +21,8 @@ const NewsfeedPost = () => {
 		getPost();
 	}, []);
 
-	const { id, title, userId, date, content } = post;
-
+	const { id, title, userId, date, content, profileUrl } = post;
+	console.log(profileUrl);
 	// 게시물 삭제 핸들러
 	const deletePostHandler = async () => {
 		const confirmDelete = confirm("정말 삭제하시겠습니까?");
@@ -38,7 +39,7 @@ const NewsfeedPost = () => {
 					<StyledPostHeader>
 						<StyledPostHeaderLeft>
 							<StyledImgBox>
-								<img src="/imgs/default-user-profile.png" alt="유저 아이디" />
+								<img src={profileUrl} alt="유저 아이디" />
 							</StyledImgBox>
 							<StyledInfoBox>
 								<StyledListTitle>{title}</StyledListTitle>

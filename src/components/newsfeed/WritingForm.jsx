@@ -102,7 +102,8 @@ function WritingForm() {
 		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
-		userId: userId
+		userId: userId,
+		profileUrl: "https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/avatar_1717566216627.png"
 	});
 
 	const handleChange = (e) => {
