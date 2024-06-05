@@ -4,8 +4,67 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getLoginUser } from "../../api/auth";
 import { logInToggle, setCurrentUser } from "../../redux/slices/user.slice";
-import LoginButton from "./LoginButton";
 
+function LoginInput() {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [user, setUser] = useState(null);
+
+	const handleLogin = async (e) => {
+		e.preventDefault();
+
+		if (!email || !password) {
+			alert("이메일 또는 비밀번호를 입력해주세요");
+		} else {
+			if (email === "email" && password === "password") {
+				alert("로그인 성공");
+			} else {
+				alert("이메일 또는 비밀번호가 잘못되었습니다.");
+			}
+		}
+
+		const loginInfo = {
+			email,
+			password
+		};
+		const userData = await getLoginUser(loginInfo);
+		setUser(userData.user);
+
+		if (userData) {
+			dispatch(logInToggle(true));
+			dispatch(setCurrentUser(userData.user));
+			navigate(-1);
+		} else {
+			alert("로그인에 실패했습니다.");
+		}
+	};
+
+	return (
+		<>
+			{!user ? (
+				<StyledFormBox onSubmit={handleLogin}>
+					<StyledInputForm
+						type="email"
+						placeholder="이메일을 입력해주세요"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+					<StyledPasswordInput
+						type="password"
+						placeholder="비밀번호를 입력해주세요"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					<LoginButton />
+				</StyledFormBox>
+			) : (
+				<div>이미 로그인 되었습니다.</div>
+			)}
+		</>
+	);
+}
 const StyledFormBox = styled.form`
 	display: flex;
 	flex-direction: column;
@@ -57,17 +116,6 @@ function LoginInput() {
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
-
-		if (!email || !password) {
-			alert("이메일 또는 비밀번호를 입력해주세요");
-		} else {
-			if (email === "email" && password === "password") {
-				alert("로그인 성공");
-			} else {
-				alert("이메일 또는 비밀번호가 잘못되었습니다.");
-			}
-		}
-
 		const loginInfo = {
 			email,
 			password
