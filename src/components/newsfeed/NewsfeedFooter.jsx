@@ -6,13 +6,11 @@ import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 
 function NewsfeedFooter({ feedId }) {
-	// const newsfeeds = useSelector((state) => state.newsfeed.list);
-	// const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
 	const isLogIn = useSelector((state) => state.user.isLogIn);
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
-	const [isLike, setIsLike] = useState(false);
 	const [heart, setHeart] = useState(0);
-
+	const [isLike, setIsLike] = useState(false);
+	console.log({ currentUser });
 	const getLikeCount = useCallback(async () => {
 		const likes = await getNewsfeedLike(feedId);
 		const likeCount = likes.length;
@@ -20,30 +18,20 @@ function NewsfeedFooter({ feedId }) {
 	}, [feedId]);
 
 	const getLikeHeart = useCallback(async () => {
-		const userlikes = await getNewsfeedLikeByUserId(currentUser.id, feedId);
-		console.log({ userlikes });
-		if (userlikes) {
-			heart > 0 ? setIsLike(true) : setIsLike(false);
+		const userlikes = await getNewsfeedLikeByUserId(feedId, currentUser.id);
+		if (userlikes !== null) {
+			return setIsLike(true);
 		} else {
-			setIsLike(false);
+			return setIsLike(false);
 		}
-	}, []);
+	}, [currentUser, feedId]);
 
 	useEffect(() => {
 		getLikeCount();
 		if (currentUser) {
 			getLikeHeart();
 		}
-	}, []);
-
-	// useEffect(() => {
-	// 	getLikeCount();
-	// 	if (!currentUser) {
-	// 		setIsLike(false);
-	// 	} else {
-	// 		getLikeHeart();
-	// 	}
-	// }, [currentUser, getLikeCount, getLikeHeart]);
+	}, [currentUser, getLikeCount, getLikeHeart]);
 
 	const handleLike = async () => {
 		if (isLogIn) {

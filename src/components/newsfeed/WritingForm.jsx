@@ -97,8 +97,6 @@ function WritingForm() {
 	const day = new Date().getDate();
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const userId = currentUser.email.split("@")[0];
-	console.log(currentUser);
-	// const userId = currentUser.email.split("@")[0];
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
@@ -106,8 +104,6 @@ function WritingForm() {
 		content: "",
 		userId: userId
 	});
-
-	const [error, setError] = useState("");
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -124,11 +120,9 @@ function WritingForm() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (!formData.title.trim() || !formData.content.trim()) {
-			setError("제목과 내용을 모두 입력해야 합니다.");
 			Swal.fire("제목과 내용을 모두 입력해야 합니다.");
 			return;
 		}
-		setError("");
 		addNewsfeed();
 		navigate(-1);
 	};

@@ -17,13 +17,14 @@ export async function getNewsfeedLike(feedId) {
 	if (error) throw error;
 	return like;
 }
-export async function getNewsfeedLikeByUserId(userId, feedId) {
+export async function getNewsfeedLikeByUserId(feedId, userId) {
 	const { data: like } = await supabase
 		.from("like")
 		.select("*")
 		.eq("feedId", feedId)
 		.eq("userId", userId)
-		.maybeSingle();
+		.limit(1)
+		.single();
 	return like;
 }
 
