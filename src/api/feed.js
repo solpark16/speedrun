@@ -1,6 +1,6 @@
 import supabase from "../supabase/supabase";
 
-export async function getNewsfeed() {
+export async function getNewsfeedByDate() {
 	const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").order("date", { ascending: true });
 	if (error) throw error;
 	return newsfeed;
