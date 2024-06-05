@@ -96,13 +96,14 @@ function WritingForm() {
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
-	const userId = currentUser.email.split("@")[0];
+	console.log(currentUser);
+	// const userId = currentUser.email.split("@")[0];
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
-		userId: userId
+		userId: "test"
 	});
 
 	const [error, setError] = useState("");
