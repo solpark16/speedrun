@@ -5,7 +5,7 @@ function NewsfeedItem({ list }) {
 	return (
 		<li key={list.id}>
 			<Link to={`/feed-read/${list.id}`}>
-				<ListItem title={list.title} content={list.content} date={list.date} userId={list.userId} />
+				<ListItem title={list.title} content={list.content} date={list.date} userName={list.userName} />
 			</Link>
 			<NewsfeedFooter feedId={list.id} />
 		</li>

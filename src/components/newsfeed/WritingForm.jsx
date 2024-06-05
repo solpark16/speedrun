@@ -78,16 +78,18 @@ function WritingForm() {
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
-	const { email } = useSelector((state) => state.user.currentUserInfo);
-	const userId = email?.split("@")[0] || "anonymous";
+	const { email, id: userId } = useSelector((state) => state.user.currentUserInfo);
+	console.log(useSelector((state) => state.user.currentUserInfo));
+	const userName = email?.split("@")[0] || "anonymous";
 
-	console.log(userId);
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
-		userId
+		userName: userName,
+		userId: userId,
+		profileUrl: "https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/avatar_1717566216627.png"
 	});
 
 	const handleChange = (e) => {
