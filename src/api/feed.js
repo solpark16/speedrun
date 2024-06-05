@@ -18,19 +18,18 @@ export async function getNewsfeedLike(feedId) {
 	return like;
 }
 export async function getNewsfeedLikeByUserId(feedId, userId) {
-	const { data: like } = await supabase
+	const { data: like, error } = await supabase
 		.from("like")
 		.select("*")
 		.eq("feedId", feedId)
 		.eq("userId", userId)
-		.limit(1)
-		.single();
+		.maybeSingle();
+	if (error) throw error;
 	return like;
 }
 
 export async function addNewsfeedLike({ userId, feedId }) {
 	const { error } = await supabase.from("like").insert([{ userId, feedId }]).select();
-
 	if (error) throw error;
 }
 
