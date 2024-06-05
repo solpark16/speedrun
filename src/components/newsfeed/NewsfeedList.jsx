@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { getNewsfeed } from "../../api/feed";
+import { getNewsfeedByDate } from "../../api/feed";
 import { getInitalFeed } from "../../redux/slices/newsfeed.slice";
 import NewsfeedItem from "./NewsfeedItem";
 
@@ -9,7 +9,7 @@ function NewsfeedList() {
 	const dispatch = useDispatch();
 	const newsfeedList = useSelector((state) => state.newsfeed.list);
 	async function getData() {
-		const data = await getNewsfeed();
+		const data = await getNewsfeedByDate();
 		dispatch(getInitalFeed(data));
 	}
 
