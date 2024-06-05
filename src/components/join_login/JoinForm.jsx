@@ -8,10 +8,10 @@ function JoinForm() {
 				<StyledJoinBg>
 					<StyledJoinText>Sign Up</StyledJoinText>
 					<StyledDivider />
-					<StyledGoogleBox>
+					{/*<StyledGoogleBox>
 						<StyledGoogleimg>Sign Up With Google</StyledGoogleimg>
 					</StyledGoogleBox>
-					<StyledDivider />
+					<StyledDivider />*/}
 					<InputForm />
 				</StyledJoinBg>
 			</div>
