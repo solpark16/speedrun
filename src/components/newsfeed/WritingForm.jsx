@@ -36,23 +36,6 @@ const StyledDiv = styled.div`
 	flex-direction: column;
 	margin-bottom: 20px;
 `;
-
-// const Input = styled.input`
-// 	font-family: inherit;
-// 	font-size: 30px;
-// 	font-weight: 500;
-// 	line-height: 48px;
-// 	text-align: left;
-// 	padding: 10px;
-// 	margin-bottom: 10px;
-// 	margin-top: 10px;
-// 	border: 4px solid #e7404a;
-// 	border-radius: 18px;
-// 	background-color: #333;
-// 	color: #fff; /* 흰색 글자 색상 */
-// 	padding-left: 35px;
-// `;
-
 const StyledTextArea = styled.textarea`
 	font-family: inherit;
 	padding: 10px;
@@ -95,13 +78,16 @@ function WritingForm() {
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
-	const currentUser = useSelector((state) => state.user.currentUserInfo);
-	const userId = currentUser.email.split("@")[0];
+	const { email, id: userId } = useSelector((state) => state.user.currentUserInfo);
+	console.log(useSelector((state) => state.user.currentUserInfo));
+	const userName = email?.split("@")[0] || "anonymous";
+
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
+		userName: userName,
 		userId: userId,
 		profileUrl: "https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/avatar_1717566216627.png"
 	});
@@ -142,16 +128,7 @@ function WritingForm() {
 						/>
 						<div style={{ borderBottom: "5px solid #b4b9c9", padding: "15px" }}></div>
 					</StyledDiv>
-					{/* <StyledDiv>
-						<Input
-							type="text"
-							id="tags"
-							name="tags"
-							placeholder="태그를 입력해주세요..."
-							value={formData.tags}
-							onChange={handleChange}
-						/>
-					</StyledDiv> */}
+
 					<StyledDiv>
 						<StyledTextArea
 							name="content"
