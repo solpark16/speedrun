@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
-function ListItem({ title, content, date, userName }) {
+function ListItem({ title, content, date, userName, profileUrl }) {
 	return (
 		<StyledListItem>
 			<StyledListHeader>
 				<StyledImgBox>
-					<img src="/imgs/default-user-profile.png" alt="유저 아이디" />
+					<img src={profileUrl} alt="유저 아이디" />
 				</StyledImgBox>
 				<StyledInfoBox>
 					<StyledListTitle>{title}</StyledListTitle>
@@ -33,8 +33,12 @@ const StyledListHeader = styled.div`
 const StyledImgBox = styled.div`
 	width: 96px;
 	height: 96px;
+	border-radius: 50%;
+	overflow: hidden;
 	img {
 		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 `;
 const StyledInfoBox = styled.div`

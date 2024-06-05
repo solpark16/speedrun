@@ -39,7 +39,6 @@ function Description() {
 	};
 
 	const handleSubmit = async () => {
-		console.log(imageUrl);
 		await supabase.from("profiles").insert({
 			image_url: imageUrl,
 			description,
