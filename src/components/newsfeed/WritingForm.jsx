@@ -92,7 +92,7 @@ function WritingForm() {
 		content: "",
 		userName: userName,
 		userId: userId,
-		profileUrl: ""
+		profileUrl
 	});
 
 	const handleChange = (e) => {
