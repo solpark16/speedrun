@@ -12,10 +12,13 @@ const StyledButtonLogin = styled.button`
 	cursor: pointer;
 `;
 
-function LoginButton() {
+function LoginButton({ buttononClick }) {
 	return (
 		<>
-			<StyledButtonLogin type="submit">Sign in</StyledButtonLogin>;
+			<StyledButtonLogin type="submit" onClick={buttononClick}>
+				Sign in
+			</StyledButtonLogin>
+			;
 		</>
 	);
 }

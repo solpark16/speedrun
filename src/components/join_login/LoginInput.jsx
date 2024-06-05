@@ -57,6 +57,23 @@ function LoginInput() {
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
+
+		if (!email || !password) {
+			alert("이메일 또는 비밀번호를 입력해주세요");
+		} else {
+			if (email === "email" && password === "password") {
+				alert("로그인 성공");
+			} else {
+				alert("등록된 회원이 아닙니다");
+			}
+		}
+
+		if (email === "emall" && password === "password") {
+			alert("로그인 성공");
+		} else {
+			alert("이메일 또는 비밀번호가 잘못되었습니다.");
+		}
+
 		const loginInfo = {
 			email,
 			password
@@ -89,7 +106,7 @@ function LoginInput() {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<LoginButton />
+					<LoginButton onClick={handleLogin} />
 				</StyledFormBox>
 			) : (
 				<div>이미 로그인 되었습니다.</div>
