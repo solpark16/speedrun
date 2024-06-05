@@ -10,7 +10,6 @@ function NewsfeedFooter({ feedId }) {
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const [heart, setHeart] = useState(0);
 	const [isLike, setIsLike] = useState(false);
-	console.log({ currentUser });
 	const getLikeCount = useCallback(async () => {
 		const likes = await getNewsfeedLike(feedId);
 		const likeCount = likes.length;
