@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import supabase from "../../supabase/supabase";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { styled } from "styled-components";
+import supabase from "../../supabase/supabase";
 
 const Profile = () => {
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
@@ -26,12 +26,12 @@ const Profile = () => {
 		const fileObj = event.target.files[0];
 		setProfileObj(fileObj);
 		const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, fileObj);
-		setProfileUrl(`https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/${data.path}`);
+		setProfileUrl(`https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`);
 		//업데이트 시키기
 		await supabase
 			.from("profiles")
 			.update({
-				image_url: `https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/${data.path}`
+				image_url: `https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`
 			})
 			.eq("userId", userId)
 			.select();
