@@ -1,34 +1,37 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { addNewsfeedLike, getNewsfeedLike, removNewsfeedLike } from "../../api/feed";
-import { updateLike } from "../../redux/slices/newsfeed.slice";
+import { addNewsfeedLike, getNewsfeedLike, getNewsfeedLikeByUserId, removNewsfeedLike } from "../../api/feed";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 
 function NewsfeedFooter({ feedId }) {
-	const dispatch = useDispatch();
-	const newsfeeds = useSelector((state) => state.newsfeed.list);
-	const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
-	const [isLike, setIsLike] = useState(false);
 	const isLogIn = useSelector((state) => state.user.isLogIn);
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const [heart, setHeart] = useState(0);
-
-	const getLikeCount = async () => {
+	const [isLike, setIsLike] = useState(false);
+	console.log({ currentUser });
+	const getLikeCount = useCallback(async () => {
 		const likes = await getNewsfeedLike(feedId);
 		const likeCount = likes.length;
 		setHeart(likeCount);
-		if (isLogIn) {
-			likeCount > 0 ? setIsLike(true) : setIsLike(false);
+	}, [feedId]);
+
+	const getLikeHeart = useCallback(async () => {
+		const userlikes = await getNewsfeedLikeByUserId(feedId, currentUser.id);
+		if (userlikes !== null) {
+			return setIsLike(true);
 		} else {
-			setIsLike(false);
+			return setIsLike(false);
 		}
-	};
+	}, [currentUser, feedId]);
 
 	useEffect(() => {
 		getLikeCount();
-	}, [selectFeed]);
+		if (currentUser) {
+			getLikeHeart();
+		}
+	}, [currentUser, getLikeCount, getLikeHeart]);
 
 	const handleLike = async () => {
 		if (isLogIn) {
@@ -38,7 +41,6 @@ function NewsfeedFooter({ feedId }) {
 			};
 			setIsLike((prev) => !prev);
 			setHeart((prev) => (isLike ? prev - 1 : prev + 1));
-			dispatch(updateLike(heart));
 			isLike ? await removNewsfeedLike(newLike) : await addNewsfeedLike(newLike);
 		} else {
 			alert("로그인이 필요합니다.");
@@ -46,7 +48,7 @@ function NewsfeedFooter({ feedId }) {
 	};
 
 	const handleShare = () => {
-		window.prompt("복사하여 사용하세요.", `http://speedrun-virid.vercel.app/feed-read/${selectFeed.id}`);
+		window.prompt("복사하여 사용하세요.", `http://speedrun-virid.vercel.app/feed-read/${feedId}`);
 	};
 	return (
 		<StyledPostFooter>

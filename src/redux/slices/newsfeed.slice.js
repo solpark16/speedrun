@@ -8,17 +8,9 @@ export const newsfeedSlice = createSlice({
 	reducers: {
 		getInitalFeed: (state, action) => {
 			state.list = action.payload;
-		},
-		updateLike: (state, action) => {
-			state.list = state.list.map((newsfeed) => {
-				if (action.payload.id == newsfeed.id) {
-					return { ...newsfeed, like: action.payload.like };
-				}
-				return newsfeed;
-			});
 		}
 	}
 });
 
-export const { getInitalFeed, updateLike } = newsfeedSlice.actions;
+export const { getInitalFeed, updateLike, setIsLike } = newsfeedSlice.actions;
 export default newsfeedSlice.reducer;
