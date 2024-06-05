@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import supabase from "../supabase/supabase";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoginJoinHeader from "../components/join_login/LoginJoinHeader";
+import supabase from "../supabase/supabase";
 function Description() {
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const [image, setImage] = useState(null);
@@ -28,7 +28,7 @@ function Description() {
 			reader.readAsDataURL(file);
 			// supabase에 이미지 등록 및 imageUrl 등록
 			const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, file);
-			setImageUrl(`https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/${data.path}`);
+			setImageUrl(`https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`);
 		} else {
 			// 파일이 없을 경우 기본 이미지(이미지를 업로드하지 않았을 경우)
 		}
