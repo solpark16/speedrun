@@ -42,7 +42,7 @@ function Description() {
 		await supabase.from("profiles").insert({
 			image_url: imageUrl,
 			description,
-			userId: currentUser.id
+			userid: currentUser.id
 		});
 		navigate("/login");
 	};
