@@ -21,8 +21,8 @@ const NewsfeedPost = () => {
 		getPost();
 	}, []);
 
-	const { id, title, userId, date, content } = post;
-
+	const { id, title, userId, userName, date, content, profileUrl } = post;
+	console.log(profileUrl);
 	// 게시물 삭제 핸들러
 	const deletePostHandler = async () => {
 		const confirmDelete = confirm("정말 삭제하시겠습니까?");
@@ -39,12 +39,12 @@ const NewsfeedPost = () => {
 					<StyledPostHeader>
 						<StyledPostHeaderTop>
 							<StyledImgBox>
-								<img src="/imgs/default-user-profile.png" alt="유저 아이디" />
+								<img src={profileUrl} alt="유저 아이디" />
 							</StyledImgBox>
 							<StyledInfoBox>
 								<StyledListTitle>{title}</StyledListTitle>
 								<div>
-									<span>{userId}</span> | <span>{date}</span>
+									<span>{userName}</span> | <span>{date}</span>
 								</div>
 							</StyledInfoBox>
 						</StyledPostHeaderTop>

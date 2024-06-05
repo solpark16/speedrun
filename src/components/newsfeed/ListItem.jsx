@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-function ListItem({ title, content, date, userId }) {
+function ListItem({ title, content, date, userName }) {
 	return (
 		<StyledListItem>
 			<StyledListHeader>
@@ -9,7 +9,7 @@ function ListItem({ title, content, date, userId }) {
 				<StyledInfoBox>
 					<StyledListTitle>{title}</StyledListTitle>
 					<div>
-						<span>{userId}</span> | <span>{date}</span>
+						<span>{userName}</span> | <span>{date}</span>
 					</div>
 				</StyledInfoBox>
 			</StyledListHeader>

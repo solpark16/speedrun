@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import supabase from "../supabase/supabase";
@@ -11,7 +11,13 @@ function Description() {
 	const [description, setDescription] = useState("");
 	const fileInputRef = useRef(null);
 	const navigate = useNavigate();
-
+	async function getDefaultImage() {
+		const { data } = supabase.storage.from("avatars").getPublicUrl("default-user-profile.png");
+		setImageUrl(data.publicUrl);
+	}
+	useEffect(() => {
+		getDefaultImage();
+	}, []);
 	const handleImageChange = async (event) => {
 		const file = event.target.files[0];
 		if (file) {
@@ -23,6 +29,8 @@ function Description() {
 			// supabase에 이미지 등록 및 imageUrl 등록
 			const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, file);
 			setImageUrl(`https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/${data.path}`);
+		} else {
+			// 파일이 없을 경우 기본 이미지(이미지를 업로드하지 않았을 경우)
 		}
 	};
 
@@ -31,6 +39,7 @@ function Description() {
 	};
 
 	const handleSubmit = async () => {
+		console.log(imageUrl);
 		await supabase.from("profiles").insert({
 			image_url: imageUrl,
 			description,
