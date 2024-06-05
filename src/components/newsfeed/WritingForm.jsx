@@ -83,7 +83,6 @@ function WritingForm() {
 	const [profileUrl, setProfileUrl] = useState("");
 	async function getProfileImage() {
 		const { data } = await supabase.from("profiles").select("*").eq("userid", userId);
-		console.log({ data });
 		setProfileUrl(data[0].image_url);
 	}
 	const [formData, setFormData] = useState({

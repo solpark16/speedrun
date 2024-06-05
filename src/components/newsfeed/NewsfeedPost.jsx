@@ -13,9 +13,6 @@ const NewsfeedPost = () => {
 	const isLogIn = useSelector((state) => state.user.isLogIn);
 	const [post, setPost] = useState({});
 
-	console.log({ isLogIn });
-	console.log({ currentUser });
-
 	async function getPost() {
 		const data = await getSelectedNewsfeed(feedId);
 		setPost(data[0]);
@@ -27,7 +24,6 @@ const NewsfeedPost = () => {
 
 	const { id, title, userid, userName, date, content, profileUrl } = post;
 
-	console.log({ userid });
 	// 게시물 삭제 핸들러
 	const deletePostHandler = async () => {
 		const confirmDelete = confirm("정말 삭제하시겠습니까?");

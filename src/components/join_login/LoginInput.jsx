@@ -78,8 +78,6 @@ function LoginInput() {
 		}
 	};
 
-	console.log(user);
-
 	return (
 		<>
 			{!user ? (

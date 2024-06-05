@@ -1,7 +1,7 @@
 import supabase from "../supabase/supabase";
 
 export async function getNewsfeedByDate() {
-	const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").order("date", { ascending: true });
+	const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").order("date", { ascending: false });
 	if (error) throw error;
 	return newsfeed;
 }
@@ -43,6 +43,6 @@ export async function addNewsfeedLike({ userId, feedId }) {
 }
 
 export async function removNewsfeedLike({ userId, feedId }) {
-	const { error } = await supabase.from("likedata").delete().eq("feedId", feedId).eq("userid", userId);
+	const { error } = await supabase.from("likedata").delete().eq("feedid", feedId).eq("userid", userId);
 	if (error) throw error;
 }
