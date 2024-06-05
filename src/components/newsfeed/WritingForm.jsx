@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
@@ -93,12 +94,14 @@ function WritingForm() {
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
+	const currentUser = useSelector((state) => state.user.currentUserInfo);
+	const userId = currentUser.email.split("@")[0];
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
-		userId: "userId"
+		userId: userId
 	});
 
 	const handleChange = (e) => {

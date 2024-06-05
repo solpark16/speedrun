@@ -1,14 +1,21 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
 function WriteButton() {
-	return (
-		<StyledWriteButton>
-			<Link to="/feed-write">
-				<span>글쓰기</span>
-			</Link>
-		</StyledWriteButton>
-	);
+	const isLogIn = useSelector((state) => state.user.isLogIn);
+
+	if (!isLogIn) {
+		return <></>;
+	} else {
+		return (
+			<StyledWriteButton>
+				<Link to="/feed-write">
+					<span>글쓰기</span>
+				</Link>
+			</StyledWriteButton>
+		);
+	}
 }
 
 const StyledWriteButton = styled.div`

@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { addNewsfeedLike, getNewsfeedLike, removNewsfeedLike } from "../../api/feed";
-import { updateLike } from "../../redux/slices/newsfeed.slice";
+import { addNewsfeedLike, getNewsfeedLike, getNewsfeedLikeByUserId, removNewsfeedLike } from "../../api/feed";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 
 function NewsfeedFooter({ feedId }) {
-	const dispatch = useDispatch();
 	const newsfeeds = useSelector((state) => state.newsfeed.list);
 	const selectFeed = newsfeeds.find((newsfeed) => newsfeed.id === feedId);
 	const [isLike, setIsLike] = useState(false);
@@ -15,20 +13,30 @@ function NewsfeedFooter({ feedId }) {
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const [heart, setHeart] = useState(0);
 
-	const getLikeCount = async () => {
-		const likes = await getNewsfeedLike(feedId);
+	const getLikeCount = useCallback(async () => {
+		const likes = await getNewsfeedLike(selectFeed?.id);
 		const likeCount = likes.length;
 		setHeart(likeCount);
-		if (isLogIn) {
-			likeCount > 0 ? setIsLike(true) : setIsLike(false);
+	}, [selectFeed?.id]);
+
+	const getLikeHeart = useCallback(async () => {
+		const likes = await getNewsfeedLikeByUserId(currentUser.id, selectFeed?.id);
+
+		if (isLogIn && likes) {
+			heart > 0 ? setIsLike(true) : setIsLike(false);
 		} else {
 			setIsLike(false);
 		}
-	};
+	}, [currentUser.id, heart, isLogIn, selectFeed?.id]);
 
 	useEffect(() => {
 		getLikeCount();
-	}, [selectFeed]);
+		if (!currentUser) {
+			setIsLike(false);
+		} else {
+			getLikeHeart();
+		}
+	}, [selectFeed, isLogIn, currentUser, getLikeHeart, getLikeCount, heart]);
 
 	const handleLike = async () => {
 		if (isLogIn) {
@@ -38,7 +46,6 @@ function NewsfeedFooter({ feedId }) {
 			};
 			setIsLike((prev) => !prev);
 			setHeart((prev) => (isLike ? prev - 1 : prev + 1));
-			dispatch(updateLike(heart));
 			isLike ? await removNewsfeedLike(newLike) : await addNewsfeedLike(newLike);
 		} else {
 			alert("로그인이 필요합니다.");

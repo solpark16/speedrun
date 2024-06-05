@@ -1,7 +1,7 @@
 import supabase from "../supabase/supabase";
 
 export async function getNewsfeed() {
-	const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").order("date", { ascending: false });
+	const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").order("date", { ascending: true });
 	if (error) throw error;
 	return newsfeed;
 }
@@ -15,6 +15,15 @@ export async function getSelectedNewsfeed(feedId) {
 export async function getNewsfeedLike(feedId) {
 	const { data: like, error } = await supabase.from("like").select("*").eq("feedId", feedId);
 	if (error) throw error;
+	return like;
+}
+export async function getNewsfeedLikeByUserId(userId, feedId) {
+	const { data: like } = await supabase
+		.from("like")
+		.select("*")
+		.eq("feedId", feedId)
+		.eq("userId", userId)
+		.maybeSingle();
 	return like;
 }
 
