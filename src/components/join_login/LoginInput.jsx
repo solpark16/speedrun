@@ -36,7 +36,7 @@ function LoginInput() {
 		if (userData) {
 			dispatch(logInToggle(true));
 			dispatch(setCurrentUser(userData.user));
-			navigate(-1);
+			navigate("/");
 		} else {
 			alert("로그인에 실패했습니다.");
 		}
