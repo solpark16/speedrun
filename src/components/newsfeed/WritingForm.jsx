@@ -79,14 +79,12 @@ function WritingForm() {
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
 	const { email, id: userId } = useSelector((state) => state.user.currentUserInfo);
-	// console.log(useSelector((state) => state.user.currentUserInfo));
 	const userName = email?.split("@")[0] || "anonymous";
 	const [profileUrl, setProfileUrl] = useState("");
 	async function getProfileImage() {
 		const { data } = await supabase.from("profiles").select("*").eq("userId", userId);
 		setProfileUrl(data[0].image_url);
 	}
-	// console.log(profileUrl);
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
@@ -112,7 +110,6 @@ function WritingForm() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(formData);
 		if (!formData.title.trim() || !formData.content.trim()) {
 			Swal.fire("제목과 내용을 모두 입력해야 합니다.");
 			return;
