@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import { getNewsfeedByDate } from "../../api/feed";
 import { getInitalFeed } from "../../redux/slices/newsfeed.slice";
@@ -7,21 +7,22 @@ import NewsfeedItem from "./NewsfeedItem";
 
 function NewsfeedList() {
 	const dispatch = useDispatch();
-	const newsfeedList = useSelector((state) => state.newsfeed.list);
-	async function getData() {
+	const [feeds, setFeeds] = useState([]);
+
+	const getDataByDate = useCallback(async () => {
 		const data = await getNewsfeedByDate();
 		dispatch(getInitalFeed(data));
-	}
+		setFeeds(data);
+	}, [dispatch]);
 
 	useEffect(() => {
-		getData();
-	}, []);
-
+		getDataByDate();
+	}, [getDataByDate]);
 	return (
 		<div className="newsfeed-list">
 			<div className="container">
 				<StyledNewsfeedList>
-					{newsfeedList.map((list) => {
+					{feeds.map((list) => {
 						return <NewsfeedItem key={list.id} list={list} />;
 					})}
 				</StyledNewsfeedList>
