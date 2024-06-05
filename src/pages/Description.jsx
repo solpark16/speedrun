@@ -1,14 +1,18 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import supabase from "../supabase/supabase";
 import styled from "styled-components";
 import LoginJoinHeader from "../components/join_login/LoginJoinHeader";
 function Description() {
+	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const [image, setImage] = useState(null);
+	const [imageUrl, setImageUrl] = useState("");
 	const [description, setDescription] = useState("");
 	const fileInputRef = useRef(null);
 	const navigate = useNavigate();
 
-	const handleImageChange = (event) => {
+	const handleImageChange = async (event) => {
 		const file = event.target.files[0];
 		if (file) {
 			const reader = new FileReader();
@@ -16,6 +20,9 @@ function Description() {
 				setImage(reader.result);
 			};
 			reader.readAsDataURL(file);
+			// supabase에 이미지 등록 및 imageUrl 등록
+			const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, file);
+			setImageUrl(`https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/${data.path}`);
 		}
 	};
 
@@ -23,11 +30,14 @@ function Description() {
 		fileInputRef.current.click();
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
+		await supabase.from("profiles").insert({
+			image_url: imageUrl,
+			description,
+			userId: currentUser.id
+		});
 		navigate("/login");
 	};
-
-	console.log("hello");
 
 	return (
 		<>
