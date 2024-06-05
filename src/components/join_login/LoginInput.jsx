@@ -68,7 +68,6 @@ function LoginInput() {
 		};
 		const userData = await getLoginUser(loginInfo);
 		setUser(userData.user);
-		console.log(userData);
 		if (userData) {
 			dispatch(logInToggle(true));
 			dispatch(setCurrentUser(userData.user));

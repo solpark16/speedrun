@@ -35,8 +35,8 @@ function NewsfeedFooter({ feedId }) {
 	const handleLike = async () => {
 		if (isLogIn) {
 			const newLike = {
-				userid: currentUser.id,
-				feedid: feedId
+				userId: currentUser.id,
+				feedId: feedId
 			};
 			setIsLike((prev) => !prev);
 			setHeart((prev) => (isLike ? prev - 1 : prev + 1));
