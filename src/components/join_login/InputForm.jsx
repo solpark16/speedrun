@@ -3,60 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import supabase from "../../supabase/supabase";
 
-const InputField = styled.input`
-	font-family: inherit;
-	width: 674px;
-	height: 67px;
-	margin-bottom: 43px;
-	border-radius: 11px;
-	border: 2px solid #b4b9c9;
-	color: #2c2b2f;
-	font-size: 21px;
-	padding-left: 77px;
-	background-repeat: no-repeat;
-	background-size: 27px 27px;
-	background-position: 27px center;
-	box-sizing: border-box;
-
-	&:focus {
-		outline: none;
-		border-color: #667788;
-	}
-`;
-const InputFieldUser = styled(InputField)`
-	background-image: url("/imgs/icon-user.png");
-`;
-
-const InputFieldEmail = styled(InputField)`
-	background-image: url("/imgs/icon-e-mail.png");
-`;
-
-const InputFieldLock = styled(InputField)`
-	background-image: url("/imgs/icon-lock.png");
-`;
-
-const Form = styled.form`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-
-const SubmitButton = styled.button`
-	width: 674px;
-	height: 67px;
-	background-color: #e7404a;
-	color: white;
-	border: none;
-	border-radius: 11px;
-	font-size: 30px;
-	font-weight: 600;
-	cursor: pointer;
-
-	&:hover {
-		background-color: #d6393f;
-	}
-`;
-
 function InputForm() {
 	let navigate = useNavigate();
 	const [email, setEmail] = useState("");
@@ -132,4 +78,57 @@ function InputForm() {
 	);
 }
 
+const InputField = styled.input`
+	font-family: inherit;
+	width: 674px;
+	height: 67px;
+	margin-bottom: 43px;
+	border-radius: 11px;
+	border: 2px solid #b4b9c9;
+	color: #2c2b2f;
+	font-size: 21px;
+	padding-left: 77px;
+	background-repeat: no-repeat;
+	background-size: 27px 27px;
+	background-position: 27px center;
+	box-sizing: border-box;
+
+	&:focus {
+		outline: none;
+		border-color: #667788;
+	}
+`;
+const InputFieldUser = styled(InputField)`
+	background-image: url("/imgs/icon-user.png");
+`;
+
+const InputFieldEmail = styled(InputField)`
+	background-image: url("/imgs/icon-e-mail.png");
+`;
+
+const InputFieldLock = styled(InputField)`
+	background-image: url("/imgs/icon-lock.png");
+`;
+
+const Form = styled.form`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+const SubmitButton = styled.button`
+	width: 674px;
+	height: 67px;
+	background-color: #e7404a;
+	color: white;
+	border: none;
+	border-radius: 11px;
+	font-size: 30px;
+	font-weight: 600;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #d6393f;
+	}
+`;
 export default InputForm;

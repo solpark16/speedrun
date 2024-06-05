@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+function LoginLinks() {
+	return (
+		<>
+			<StyledLoginLink>
+				You haven&#039;t any accout? <StyledJoinLink to="/join">Sign Up</StyledJoinLink>
+			</StyledLoginLink>
+			;
+		</>
+	);
+}
+
 const StyledLoginLink = styled.p`
 	text-align: center;
 	margin-top: 2.5rem;
@@ -14,16 +25,5 @@ const StyledJoinLink = styled(Link)`
 	text-decoration: none;
 	margin-left: 20px;
 `;
-
-function LoginLinks() {
-	return (
-		<>
-			<StyledLoginLink>
-				You haven't any accout? <StyledJoinLink to="/join">Sign Up</StyledJoinLink>
-			</StyledLoginLink>
-			;
-		</>
-	);
-}
 
 export default LoginLinks;
