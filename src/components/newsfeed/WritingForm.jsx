@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 import supabase from "../../supabase/supabase";
-import Swal from "sweetalert2";
 
 const StyledTitleInput = styled.input`
 	font-family: inherit;
@@ -89,23 +90,19 @@ const StyledButton = styled.button`
 	}
 `;
 
-const ErrorMessage = styled.div`
-	color: red;
-	font-size: 16px;
-	margin-top: 10px;
-`;
-
 function WritingForm() {
 	const navigate = useNavigate();
+	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
+	const userId = currentUser.email.split("@")[0];
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
-		userId: "userId"
+		userId: userId
 	});
 
 	const [error, setError] = useState("");
