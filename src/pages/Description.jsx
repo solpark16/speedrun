@@ -39,8 +39,6 @@ function Description() {
 		navigate("/login");
 	};
 
-	console.log("hello");
-
 	return (
 		<>
 			<LoginJoinHeader />
