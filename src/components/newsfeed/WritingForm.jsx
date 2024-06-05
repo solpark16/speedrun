@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 import supabase from "../../supabase/supabase";
 
@@ -90,16 +92,21 @@ const StyledButton = styled.button`
 
 function WritingForm() {
 	const navigate = useNavigate();
+	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
+	console.log(currentUser);
+	// const userId = currentUser.email.split("@")[0];
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
-		userId: "userId"
+		userId: "test"
 	});
+
+	const [error, setError] = useState("");
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -115,6 +122,12 @@ function WritingForm() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (!formData.title.trim() || !formData.content.trim()) {
+			setError("제목과 내용을 모두 입력해야 합니다.");
+			Swal.fire("제목과 내용을 모두 입력해야 합니다.");
+			return;
+		}
+		setError("");
 		addNewsfeed();
 		navigate(-1);
 	};
