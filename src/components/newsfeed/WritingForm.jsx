@@ -12,50 +12,58 @@ function WritingForm() {
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
-	const { id: userId, user_metadata } = useSelector((state) => state.user.currentUserInfo);
-	const userName = user_metadata.display_name || "anonymous";
+	const currentUser = useSelector((state) => state.user.currentUserInfo);
+
+	const { id: userId, user_metadata } = currentUser;
+	const [userName, setUserName] = useState("");
 	const [profileUrl, setProfileUrl] = useState("");
+	const [userid, setUserid] = useState("");
 
 	async function getProfileImage() {
-		const data = await profileByUserId(userId);
-		setProfileUrl(data[0].image_url);
+		if (Object.keys(currentUser).length) {
+			const data = await profileByUserId(userId);
+			setProfileUrl(data[0].image_url);
+			setUserName(user_metadata.display_name);
+			setUserid(userId);
+		}
 	}
+
+	getProfileImage();
+
 	const [formData, setFormData] = useState({
 		id: uuidv4(),
 		date: `${year}/${month}/${day}`,
 		title: "",
 		content: "",
-		userName: userName,
-		userid: userId,
-		profileUrl
+		userName: "",
+		userid: "",
+		profileUrl: ""
 	});
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({
 			...formData,
-			profileUrl,
 			[name]: value
 		});
 	};
 
 	async function addNewsfeed() {
-		await supabase.from("newsfeed").insert([formData]).select();
+		await supabase
+			.from("newsfeed")
+			.insert({ ...formData, userName, profileUrl, userid })
+			.select();
 	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (!formData.title.trim() || !formData.content.trim()) {
-			Swal.fire("제목과 내용을 모두 입력해야 합니다.");
+			Swal.fire("제목과 내용을 모두 입력해주세요.");
 			return;
 		}
 		addNewsfeed();
 		navigate("/");
 	};
-
-	useEffect(() => {
-		getProfileImage();
-	}, []);
 
 	return (
 		<div>
