@@ -13,7 +13,7 @@ function WritingForm() {
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
-	const { email, id: userId, user_metadata } = currentUser;
+	const { id: userId, user_metadata } = currentUser;
 	const [userName, setUserName] = useState("");
 	const [profileUrl, setProfileUrl] = useState("");
 	const [userid, setUserid] = useState("");

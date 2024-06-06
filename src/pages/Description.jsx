@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoginJoinHeader from "../components/join_login/LoginJoinHeader";
+import { logInToggle } from "../redux/slices/user.slice";
 import supabase from "../supabase/supabase";
 function Description() {
+	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const [image, setImage] = useState(null);
 	const [imageUrl, setImageUrl] = useState("");
@@ -26,7 +28,6 @@ function Description() {
 				setImage(reader.result);
 			};
 			reader.readAsDataURL(file);
-			// supabase에 이미지 등록 및 imageUrl 등록
 			const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, file);
 			setImageUrl(`https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`);
 		}
@@ -42,7 +43,8 @@ function Description() {
 			description,
 			userid: currentUser.id
 		});
-		navigate("/login");
+		dispatch(logInToggle(true));
+		navigate("/");
 	};
 
 	return (
