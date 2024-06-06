@@ -12,9 +12,14 @@ function WritingForm() {
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
+<<<<<<< HEAD
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const { id: userId, user_metadata } = currentUser;
 	const [userName, setUserName] = useState("");
+=======
+	const { id: userId, user_metadata } = useSelector((state) => state.user.currentUserInfo);
+	const userName = user_metadata.display_name || "anonymous";
+>>>>>>> be79c756d77fd0ff5bb304ececd764008cf454a3
 	const [profileUrl, setProfileUrl] = useState("");
 	const [userid, setUserid] = useState("");
 
