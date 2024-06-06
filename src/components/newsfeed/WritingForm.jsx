@@ -13,7 +13,6 @@ function WritingForm() {
 	const month = new Date().getMonth() + 1;
 	const day = new Date().getDate();
 	const { id: userId, user_metadata } = useSelector((state) => state.user.currentUserInfo);
-	console.log(user_metadata);
 	const userName = user_metadata.display_name || "anonymous";
 	const [profileUrl, setProfileUrl] = useState("");
 
