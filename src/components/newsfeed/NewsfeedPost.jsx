@@ -31,7 +31,6 @@ const NewsfeedPost = () => {
 			navigate("/");
 		}
 	};
-
 	return (
 		<StyledNewsfeedPost>
 			<div className="container">
