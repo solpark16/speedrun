@@ -8,10 +8,7 @@ function JoinForm() {
 				<StyledJoinBg>
 					<StyledJoinText>Sign Up</StyledJoinText>
 					<StyledDivider />
-					{/*<StyledGoogleBox>
-						<StyledGoogleimg>Sign Up With Google</StyledGoogleimg>
-					</StyledGoogleBox>
-					<StyledDivider />*/}
+
 					<InputForm />
 				</StyledJoinBg>
 			</div>
@@ -52,37 +49,4 @@ const StyledDivider = styled.div`
 	margin-bottom: 43px;
 `;
 
-// const StyledGoogleBox = styled.div`
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-
-// 	background-color: #e6e8ee;
-
-// 	width: 674px;
-// 	height: 67px;
-// 	margin-bottom: 43px;
-// 	border-radius: 11px;
-
-// 	&:hover {
-// 		background-color: #d3d5dd;
-// 	}
-// `;
-
-// const StyledGoogleimg = styled.div`
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	padding: 0px 64px;
-
-// 	color: #2c2b2f;
-// 	font-size: 30px;
-// 	font-weight: 600;
-
-// 	height: 32px;
-// 	background-image: url("/imgs/icon-Google.png");
-// 	background-position: center left;
-// 	background-size: 32px 32px;
-// 	background-repeat: no-repeat;
-// `;
 export default JoinForm;
