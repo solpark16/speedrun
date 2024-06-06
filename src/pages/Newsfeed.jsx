@@ -1,25 +1,18 @@
-import { Link } from "react-router-dom";
+import Header from "../components/common/Header";
+import MainBanner from "../components/mainpage/MainBanner";
+import NewGames from "../components/mainpage/NewGames";
+import NewsfeedList from "../components/newsfeed/NewsfeedList";
+import WriteButton from "../components/newsfeed/WriteButton";
 
 function Newfeed() {
 	return (
-		<main>
-			<h1>스피드런 화이팅!!</h1>
-			<div>
-				<Link to="/feed-read/1">읽기 페이지</Link>
-			</div>
-			<div>
-				<Link to="/feed-write/1">쓰기 페이지</Link>
-			</div>
-			<div>
-				<Link to="/join">회원가입 페이지</Link>
-			</div>
-			<div>
-				<Link to="/login">로그인 페이지</Link>
-			</div>
-			<div>
-				<Link to="/my-page/i">마이페이지</Link>
-			</div>
-		</main>
+		<>
+			<Header />
+			<MainBanner />
+			<NewGames />
+			<NewsfeedList />
+			<WriteButton />
+		</>
 	);
 }
 

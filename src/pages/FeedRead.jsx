@@ -1,5 +1,13 @@
+import Header from "../components/common/Header";
+import NewsfeedPost from "../components/newsfeed/NewsfeedPost";
+
 function FeedRead() {
-  return <div>FeedRead</div>;
+	return (
+		<>
+			<Header />
+			<NewsfeedPost />
+		</>
+	);
 }
 
 export default FeedRead;
