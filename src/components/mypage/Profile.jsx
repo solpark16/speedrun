@@ -41,10 +41,10 @@ const Profile = () => {
 						</label>
 						<StyledImageChangeInput type="file" name="file" id="file" onChange={handleImageChange} />
 					</StyledProfileImgBox>
-					<div>
+					<StyledProfileTextBox>
 						<StyledProfileId>{currentUser.user_metadata?.display_name}</StyledProfileId>
 						<StyledProfileContext>{description}</StyledProfileContext>
-					</div>
+					</StyledProfileTextBox>
 				</StyledProfileBox>
 			</div>
 		</StyledProfileBanner>
@@ -100,6 +100,11 @@ const StyledProfileImg = styled.img`
 `;
 const StyledImageChangeInput = styled.input`
 	display: none;
+`;
+const StyledProfileTextBox = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 `;
 const StyledProfileId = styled.p`
 	font-size: 48px;

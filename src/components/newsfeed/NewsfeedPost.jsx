@@ -23,7 +23,6 @@ const NewsfeedPost = () => {
 	}, []);
 
 	const { id, title, userid, userName, date, content, profileUrl } = post;
-
 	// 게시물 삭제 핸들러
 	const deletePostHandler = async () => {
 		const confirmDelete = confirm("정말 삭제하시겠습니까?");

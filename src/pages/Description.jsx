@@ -29,8 +29,6 @@ function Description() {
 			// supabase에 이미지 등록 및 imageUrl 등록
 			const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, file);
 			setImageUrl(`https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`);
-		} else {
-			// 파일이 없을 경우 기본 이미지(이미지를 업로드하지 않았을 경우)
 		}
 	};
 
