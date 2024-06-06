@@ -24,9 +24,13 @@ const MyNewsfeedList = () => {
 			<div className="container">
 				<StyledTitleMyNewsfeedList>내 게시물</StyledTitleMyNewsfeedList>
 				<StyledNewsfeedList>
-					{newsfeedList.map((list) => {
-						return <NewsfeedItem key={list.id} list={list} />;
-					})}
+					{newsfeedList.length ? (
+						newsfeedList.map((list) => {
+							return <NewsfeedItem key={list.id} list={list} />;
+						})
+					) : (
+						<StyledNoPost>작성하신 게시물이 없습니다.</StyledNoPost>
+					)}
 				</StyledNewsfeedList>
 			</div>
 		</StyledMyNewsfeedList>
@@ -42,6 +46,11 @@ const StyledNewsfeedList = styled.ul`
 		border-bottom: 3px solid #e7404a;
 		padding: 60px 0;
 	}
+`;
+const StyledNoPost = styled.div`
+	text-align: center;
+	font-size: 28px;
+	color: #808080;
 `;
 const StyledTitleMyNewsfeedList = styled.h2`
 	font-size: 48px;
