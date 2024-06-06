@@ -1,40 +1,30 @@
-import { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import supabase from "../../supabase/supabase";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { styled } from "styled-components";
+import { profileByUserId, uploadProfile, uploadProfileImage } from "../../api/profile";
 
 const Profile = () => {
 	const currentUser = useSelector((state) => state.user.currentUserInfo);
 	const { userId } = useParams();
 	const [profileUrl, setProfileUrl] = useState("");
-	const [profileObj, setProfileObj] = useState({});
 	const [description, setDescription] = useState("");
-	async function getImage() {
-		// profiles에서 이미지 및 description 데이터 가져오기
-		const { data } = await supabase.from("profiles").select("*").eq("userId", userId);
+	const getImage = useCallback(async () => {
+		const data = await profileByUserId(userId);
 		setProfileUrl(data[0].image_url);
 		setDescription(data[0].description);
-	}
+	}, [userId]);
+
 	useEffect(() => {
 		getImage();
-	}, []);
+	}, [getImage]);
 
 	const handleImageChange = async (event) => {
 		event.preventDefault();
-
 		const fileObj = event.target.files[0];
-		setProfileObj(fileObj);
-		const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, fileObj);
-		setProfileUrl(`https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/${data.path}`);
-		//업데이트 시키기
-		await supabase
-			.from("profiles")
-			.update({
-				image_url: `https://piuvdfomheejtudrutht.supabase.co/storage/v1/object/public/avatars/${data.path}`
-			})
-			.eq("userId", userId)
-			.select();
+		const data = await uploadProfileImage(fileObj);
+		setProfileUrl(`https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`);
+		await uploadProfile(data, userId);
 	};
 
 	return (

@@ -49,7 +49,7 @@ const NewsfeedPost = () => {
 							</StyledInfoBox>
 						</StyledPostHeaderTop>
 						<StyledPostHeaderBottom>
-							{isLogIn && currentUser.id === userId ? (
+							{isLogIn && currentUser.id === userid ? (
 								<>
 									<Link to={`/feed-edit/${id}`}>
 										<StyledButton>수정하기</StyledButton>

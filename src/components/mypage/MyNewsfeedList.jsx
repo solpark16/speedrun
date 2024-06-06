@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { styled } from "styled-components";
-import { getNewsfeedByDate, getNewsfeedByUserId } from "../../api/feed";
-import { getInitalFeed } from "../../redux/slices/newsfeed.slice";
 import { useEffect } from "react";
-import NewsfeedItem from "../newsfeed/NewsfeedItem";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { styled } from "styled-components";
+import { getNewsfeedByUserId } from "../../api/feed";
+import { getInitalFeed } from "../../redux/slices/newsfeed.slice";
+import NewsfeedItem from "../newsfeed/NewsfeedItem";
 
 const MyNewsfeedList = () => {
 	const { userId } = useParams();

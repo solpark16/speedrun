@@ -1,7 +1,81 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import supabase from "../../supabase/supabase";
+import { signUp } from "../../api/auth";
+
+function InputForm() {
+	let navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+	const [displayName, setDisplayName] = useState("");
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		if (displayName == "") {
+			alert("사용자 이름이 입력되지 않았습니다.");
+			return;
+		}
+
+		if (password !== confirmPassword) {
+			alert("비밀번호가 일치하지 않습니다.");
+			return;
+		}
+
+		try {
+			const newUserInfo = {
+				email: email,
+				password: password,
+				options: {
+					data: {
+						display_name: displayName
+					}
+				}
+			};
+			const error = await signUp(newUserInfo);
+			if (error) {
+				alert(error.message);
+			} else {
+				alert("회원가입이 성공적으로 완료되었습니다.");
+				navigate("/Description");
+			}
+		} catch (err) {
+			console.error("Unexpected error:", err);
+			alert("예기치 못한 오류가 발생했습니다. 다시 시도해 주세요.");
+		}
+	};
+
+	return (
+		<Form onSubmit={handleSubmit}>
+			<InputFieldEmail
+				type="email"
+				placeholder="이메일을 입력해주세요"
+				value={email}
+				onChange={(e) => setEmail(e.target.value)}
+			/>
+			<InputFieldUser
+				type="text"
+				placeholder="사용자 이름을 입력해주세요"
+				value={displayName}
+				onChange={(e) => setDisplayName(e.target.value)}
+			/>
+			<InputFieldLock
+				type="password"
+				placeholder="비밀번호를 입력해주세요"
+				value={password}
+				onChange={(e) => setPassword(e.target.value)}
+			/>
+			<InputFieldLock
+				type="password"
+				placeholder="비밀번호를 다시 입력해주세요"
+				value={confirmPassword}
+				onChange={(e) => setConfirmPassword(e.target.value)}
+			/>
+			<SubmitButton type="submit">다음단계로</SubmitButton>
+		</Form>
+	);
+}
 
 const InputField = styled.input`
 	font-family: inherit;
@@ -56,80 +130,4 @@ const SubmitButton = styled.button`
 		background-color: #d6393f;
 	}
 `;
-
-function InputForm() {
-	let navigate = useNavigate();
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const [displayName, setDisplayName] = useState("");
-
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-
-		if (displayName == "") {
-			alert("사용자 이름이 입력되지 않았습니다.");
-			return;
-		}
-
-		if (password !== confirmPassword) {
-			alert("비밀번호가 일치하지 않습니다.");
-			return;
-		}
-
-		try {
-			// Supabase 회원가입 로직
-			const { error } = await supabase.auth.signUp({
-				email: email,
-				password: password,
-				options: {
-					data: {
-						display_name: displayName
-					}
-				}
-			});
-
-			if (error) {
-				alert(error.message);
-			} else {
-				alert("회원가입이 성공적으로 완료되었습니다.");
-				navigate("/Description");
-			}
-		} catch (err) {
-			console.error("Unexpected error:", err);
-			alert("예기치 못한 오류가 발생했습니다. 다시 시도해 주세요.");
-		}
-	};
-
-	return (
-		<Form onSubmit={handleSubmit}>
-			<InputFieldEmail
-				type="email"
-				placeholder="이메일을 입력해주세요"
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}
-			/>
-			<InputFieldUser
-				type="text"
-				placeholder="사용자 이름을 입력해주세요"
-				value={displayName}
-				onChange={(e) => setDisplayName(e.target.value)}
-			/>
-			<InputFieldLock
-				type="password"
-				placeholder="비밀번호를 입력해주세요"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-			/>
-			<InputFieldLock
-				type="password"
-				placeholder="비밀번호를 다시 입력해주세요"
-				value={confirmPassword}
-				onChange={(e) => setConfirmPassword(e.target.value)}
-			/>
-			<SubmitButton type="submit">다음단계로</SubmitButton>
-		</Form>
-	);
-}
-
 export default InputForm;
