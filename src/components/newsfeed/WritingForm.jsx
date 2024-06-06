@@ -50,7 +50,7 @@ function WritingForm() {
 			return;
 		}
 		addNewsfeed();
-		navigate(-1);
+		navigate("/");
 	};
 
 	useEffect(() => {
