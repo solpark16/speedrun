@@ -6,6 +6,13 @@ export async function getNewsfeedByDate() {
 	return newsfeed;
 }
 
+export async function getNewsfeedByLike() {
+	const { data, error } = await supabase.from("newsfeed").select(`*, likedata(count)`);
+	data.sort((a, b) => b.likedata[0].count - a.likedata[0].count);
+	if (error) throw error;
+	return data;
+}
+
 export async function getNewsfeedByUserId(userId) {
 	const { data: newsfeed, error } = await supabase.from("newsfeed").select("*").eq("userid", userId);
 	if (error) throw error;

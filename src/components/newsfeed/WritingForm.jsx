@@ -16,7 +16,6 @@ function WritingForm() {
 	const userName = email?.split("@")[0] || "anonymous";
 	const [profileUrl, setProfileUrl] = useState("");
 	async function getProfileImage() {
-		//const { data } = await supabase.from("profiles").select("*").eq("userid", userId);
 		const data = await profileByUserId(userId);
 		setProfileUrl(data[0].image_url);
 	}
