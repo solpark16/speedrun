@@ -1,35 +1,87 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
-import { getNewsfeedByDate } from "../../api/feed";
+import { getNewsfeedByDate, getNewsfeedByLike } from "../../api/feed";
 import { getInitalFeed } from "../../redux/slices/newsfeed.slice";
 import NewsfeedItem from "./NewsfeedItem";
 
 function NewsfeedList() {
 	const dispatch = useDispatch();
 	const [feeds, setFeeds] = useState([]);
+	const [isSortActive, setIsSortActive] = useState(null);
 
 	const getDataByDate = useCallback(async () => {
 		const data = await getNewsfeedByDate();
 		dispatch(getInitalFeed(data));
 		setFeeds(data);
+		setIsSortActive("date");
 	}, [dispatch]);
+
+	const handleClickSortByDate = async () => {
+		setIsSortActive("date");
+		getDataByDate();
+	};
+
+	const handleClickSortByLike = async () => {
+		const data = await getNewsfeedByLike();
+		setFeeds(data);
+		setIsSortActive("like");
+	};
 
 	useEffect(() => {
 		getDataByDate();
 	}, [getDataByDate]);
+
 	return (
 		<div className="newsfeed-list">
 			<div className="container">
+				<StyledSortMenu>
+					<li>
+						<StyledSortbutton
+							$isActive={isSortActive === "date"} // isActive 속성 전달
+							onClick={handleClickSortByDate}
+						>
+							최신순
+						</StyledSortbutton>
+					</li>
+					<li>
+						<StyledSortbutton
+							$isActive={isSortActive === "like"} // isActive 속성 전달
+							onClick={handleClickSortByLike}
+						>
+							인기순
+						</StyledSortbutton>
+					</li>
+				</StyledSortMenu>
 				<StyledNewsfeedList>
-					{feeds.map((list) => {
-						return <NewsfeedItem key={list.id} list={list} />;
-					})}
+					{feeds.map((list) => (
+						<NewsfeedItem key={list.id} list={list} />
+					))}
 				</StyledNewsfeedList>
 			</div>
 		</div>
 	);
 }
+
+const StyledSortMenu = styled.ul`
+	display: flex;
+	justify-content: flex-end;
+	gap: 15px;
+`;
+
+const StyledSortbutton = styled.button`
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	color: white;
+	font-size: 18px;
+	padding: 10px 15px;
+	border-radius: 10px;
+	background-color: ${(props) => (props.$isActive ? "#e7404a" : "#818181")};
+	&:hover {
+		text-decoration: underline;
+	}
+`;
 
 const StyledNewsfeedList = styled.ul`
 	padding-bottom: 200px;

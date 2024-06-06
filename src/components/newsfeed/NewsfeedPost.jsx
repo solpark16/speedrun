@@ -104,7 +104,7 @@ const StyledImgBox = styled.div`
 	}
 `;
 const StyledInfoBox = styled.div`
-	/* width: 100%; */
+	width: 88%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
