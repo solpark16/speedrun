@@ -58,7 +58,7 @@ function WritingForm() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (!formData.title.trim() || !formData.content.trim()) {
-			Swal.fire("제목과 내용을 모두 입력해야 합니다.");
+			Swal.fire("제목과 내용을 모두 입력해주세요.");
 			return;
 		}
 		addNewsfeed();
