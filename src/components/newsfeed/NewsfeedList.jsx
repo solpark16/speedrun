@@ -29,6 +29,7 @@ function NewsfeedList() {
 	};
 
 	useEffect(() => {
+		console.log("함수 재실행 테스트");
 		getDataByDate();
 	}, [getDataByDate]);
 
