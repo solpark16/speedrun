@@ -37,6 +37,9 @@
 - sweetalert2
 - uuid
 
+## 시연영상
+![시연 영상 링크](https://youtu.be/vH-yuPOAeJE)
+
 ![image](https://github.com/erinmzo/speedrun/assets/166181947/7176abd6-664f-40ed-be6e-06b4f2689169)
 ![image](https://github.com/erinmzo/speedrun/assets/166181947/c27b809c-1f0b-4109-9141-d6e10d5e06e5)
 
