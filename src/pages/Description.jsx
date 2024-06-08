@@ -29,7 +29,7 @@ function Description() {
 			};
 			reader.readAsDataURL(file);
 			const { data } = await supabase.storage.from("avatars").upload(`avatar_${Date.now()}.png`, file);
-			setImageUrl(`https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`);
+			setImageUrl(`https://nwgklfpvdgbiihmimalr.supabase.co/storage/v1/object/public/avatars/${data.path}`);
 		}
 	};
 

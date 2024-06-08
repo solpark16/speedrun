@@ -23,7 +23,7 @@ const Profile = () => {
 		event.preventDefault();
 		const fileObj = event.target.files[0];
 		const data = await uploadProfileImage(fileObj);
-		setProfileUrl(`https://plevcfudvytjcvopihkk.supabase.co/storage/v1/object/public/avatars/${data.path}`);
+		setProfileUrl(`https://nwgklfpvdgbiihmimalr.supabase.co/storage/v1/object/public/avatars/${data.path}`);
 		await uploadProfile(data, userId);
 	};
 
