@@ -31,7 +31,7 @@ function NewsfeedList() {
 	useEffect(() => {
 		getDataByDate();
 	}, [getDataByDate]);
-
+	console.log(feeds.length);
 	return (
 		<div className="newsfeed-list">
 			<div className="container">
@@ -54,9 +54,11 @@ function NewsfeedList() {
 					</li>
 				</StyledSortMenu>
 				<StyledNewsfeedList>
-					{feeds.map((list) => (
-						<NewsfeedItem key={list.id} list={list} />
-					))}
+					{feeds.length ? (
+						feeds.map((list) => <NewsfeedItem key={list.id} list={list} />)
+					) : (
+						<StyledNoPost>작성된 게시물이 없습니다.</StyledNoPost>
+					)}
 				</StyledNewsfeedList>
 			</div>
 		</div>
@@ -82,7 +84,12 @@ const StyledSortbutton = styled.button`
 		text-decoration: underline;
 	}
 `;
-
+const StyledNoPost = styled.div`
+	text-align: center;
+	font-size: 28px;
+	color: #808080;
+	margin-top: 60px;
+`;
 const StyledNewsfeedList = styled.ul`
 	padding-bottom: 200px;
 	li {
